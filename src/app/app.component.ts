@@ -8,7 +8,7 @@ import { auth } from "firebase/app";
   template: `
     <div *ngIf="afAuth.user | async as user; else showLogin">
       <h1>Hello {{ user.displayName }}!</h1>
-      <button (click)="logout()">Logout</button>
+      <button (click)="logout()">Logout!</button>
     </div>
     <ng-template #showLogin>
       <h2>Login</h2>
