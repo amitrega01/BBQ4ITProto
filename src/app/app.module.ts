@@ -10,10 +10,20 @@ import { FormsModule } from "@angular/forms";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { CompetitionsComponent } from "./competitions/competitions.component";
 import { AngularFireDatabaseModule } from "@angular/fire/database";
+import { RouterModule, Routes } from "@angular/router";
+import { CompetitionComponent } from "./competition/competition.component";
+
+const appRoutes: Routes = [
+  { path: "competition", component: CompetitionComponent }
+];
 
 @NgModule({
-  declarations: [AppComponent, CompetitionsComponent],
+  declarations: [AppComponent, CompetitionsComponent, CompetitionComponent],
   imports: [
+    RouterModule.forRoot(
+      appRoutes,
+      { enableTracing: true } // <-- debugging purposes only
+    ),
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
