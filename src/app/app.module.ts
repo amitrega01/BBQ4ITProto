@@ -8,14 +8,17 @@ import { environment } from "src/environments/environment";
 
 import { FormsModule } from "@angular/forms";
 import { AngularFireAuthModule } from "@angular/fire/auth";
+import { CompetitionsComponent } from "./competitions/competitions.component";
+import { AngularFireDatabaseModule } from "@angular/fire/database";
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, CompetitionsComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
+    AngularFireDatabaseModule,
     FormsModule
   ],
   providers: [],

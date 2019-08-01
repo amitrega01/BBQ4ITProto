@@ -1,14 +1,12 @@
 import { Component, Input, OnInit } from "@angular/core";
 
 import { AngularFireAuth } from "@angular/fire/auth";
-import { auth } from "firebase/app";
 
 @Component({
   selector: "app-root",
   template: `
     <div *ngIf="afAuth.user | async as user; else showLogin">
-      <h1>Hello {{ user.displayName }}!</h1>
-      <button (click)="logout()">Logout!</button>
+      <app-competitions></app-competitions>
     </div>
     <ng-template #showLogin>
       <h2>Login</h2>
@@ -23,9 +21,13 @@ import { auth } from "firebase/app";
   `
 })
 export class AppComponent {
-  constructor(public afAuth: AngularFireAuth) {}
   email: string;
   password: string;
+  constructor(public afAuth: AngularFireAuth) {}
+
+  ngOnInit() {
+    console.log("Init");
+  }
   onClickSubmit(data) {
     this.afAuth.auth
       .signInWithEmailAndPassword(data.email, data.password)
