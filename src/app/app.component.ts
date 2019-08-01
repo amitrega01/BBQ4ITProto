@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 
 import { AngularFireAuth } from "@angular/fire/auth";
 import { auth } from "firebase/app";
@@ -11,20 +11,29 @@ import { auth } from "firebase/app";
       <button (click)="logout()">Logout</button>
     </div>
     <ng-template #showLogin>
-      <p>Please login.</p>
-      <button (click)="login()">Login with Google</button>
+      <h2>Login</h2>
+      <form #userlogin="ngForm" (ngSubmit)="onClickSubmit(userlogin.value)">
+        <input type="text" name="email" placeholder="Email" ngModel />
+        <br />
+        <input type="password" name="password" placeholder="Password" ngModel />
+        <br />
+        <input type="submit" value="submit" />
+      </form>
     </ng-template>
   `
 })
 export class AppComponent {
   constructor(public afAuth: AngularFireAuth) {}
-  login() {
+  email: string;
+  password: string;
+  onClickSubmit(data) {
     this.afAuth.auth
-      .signInWithEmailAndPassword("amitrega01@gmail.com", "testtest")
+      .signInWithEmailAndPassword(data.email, data.password)
       .then(res => {
         console.log(res);
       });
   }
+  login() {}
   logout() {
     this.afAuth.auth.signOut();
   }
