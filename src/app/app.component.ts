@@ -1,10 +1,31 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
+
+import { AngularFireAuth } from "@angular/fire/auth";
+import { auth } from "firebase/app";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: "app-root",
+  template: `
+    <div *ngIf="afAuth.user | async as user; else showLogin">
+      <h1>Hello {{ user.displayName }}!</h1>
+      <button (click)="logout()">Logout</button>
+    </div>
+    <ng-template #showLogin>
+      <p>Please login.</p>
+      <button (click)="login()">Login with Google</button>
+    </ng-template>
+  `
 })
 export class AppComponent {
-  title = 'BBQ4ITProto';
+  constructor(public afAuth: AngularFireAuth) {}
+  login() {
+    this.afAuth.auth
+      .signInWithEmailAndPassword("amitrega01@gmail.com", "testtest")
+      .then(res => {
+        console.log(res);
+      });
+  }
+  logout() {
+    this.afAuth.auth.signOut();
+  }
 }
