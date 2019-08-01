@@ -34,6 +34,6 @@ export class CompetitionComponent implements OnInit {
   ngOnInit() {}
 
   onClickSubmit(data) {
-    this.db.object(this._comp.name).set(data);
+    this.db.list(this._comp.route).push(data);
   }
 }
