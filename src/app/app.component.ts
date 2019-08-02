@@ -29,16 +29,16 @@ import { AngularFireAuth } from "@angular/fire/auth";
    
     <ng-template #showLogin>
      
-       <div id="test">
-      <form  #userlogin="ngForm" (ngSubmit)="onClickSubmit(userlogin.value)">
-        <h2>Login panel</h2>
-        <br/>
-        <input type="text" name="email" placeholder="Email" ngModel />
-        <br />
-        <input type="password" name="password" placeholder="Password" ngModel />
-        <br />
-        <input type="submit" value="submit" />
-      </form>
+      <div id="test">
+        <form  #userlogin="ngForm" (ngSubmit)="onClickSubmit(userlogin.value)">
+          <h2>Login panel</h2>
+          <br/>
+          <input type="text" name="email" placeholder="Email" ngModel />
+          <br />
+          <input type="password" name="password" placeholder="Password" ngModel />
+          <br />
+          <input type="submit" value="submit" />
+        </form>
       </div>
     </ng-template>
     </div>
