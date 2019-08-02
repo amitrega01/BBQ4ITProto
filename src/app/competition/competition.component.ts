@@ -1,5 +1,11 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { AngularFireDatabase, AngularFireObject } from "@angular/fire/database";
+import {
+  AngularFirestore,
+  AngularFirestoreDocument,
+  AngularFirestoreCollection
+} from "@angular/fire/firestore";
+import { Competition } from "../Competition";
+import { Score } from "../Score";
 @Component({
   selector: "app-competition",
   template: `
@@ -17,10 +23,11 @@ import { AngularFireDatabase, AngularFireObject } from "@angular/fire/database";
   styleUrls: ["./competition.component.css"]
 })
 export class CompetitionComponent implements OnInit {
-  _comp: any;
-  db: AngularFireDatabase;
+  _comp: Competition;
+  afs: AngularFirestore;
+
   @Input()
-  set comp(comp: any) {
+  set comp(comp: Competition) {
     if (comp != undefined) {
       this._comp = comp;
     }
@@ -28,12 +35,14 @@ export class CompetitionComponent implements OnInit {
   get comp() {
     return this._comp;
   }
-  constructor(db: AngularFireDatabase) {
-    this.db = db;
+
+  constructor(afs: AngularFirestore) {
+    this.afs = afs;
   }
+
   ngOnInit() {}
 
-  onClickSubmit(data) {
-    this.db.list(this._comp.route).push(data);
+  onClickSubmit(score: Score) {
+    this.afs.collection(this._comp.route).add(score);
   }
 }
