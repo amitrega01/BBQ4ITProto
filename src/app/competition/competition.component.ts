@@ -12,13 +12,14 @@ import { MatTableDataSource } from '@angular/material/table';
 export class CompetitionComponent implements OnInit {
   _comp: Competition;
   afs: AngularFirestore;
-  results: Observable<Score[]>;
+  results: any;
   @Input()
   set comp(comp: Competition) {
     if (comp != undefined) {
       this._comp = comp;
+      this.results = this.afs.collection<Score>(this._comp.route, ref => ref.orderBy('points', 'desc')).valueChanges();
 
-      this.results = this.afs.collection<Score>(this._comp.route).valueChanges();
+      // zapytania w firestore https://firebase.google.com/docs/firestore/query-data/order-limit-data
     }
   }
   get comp() {
