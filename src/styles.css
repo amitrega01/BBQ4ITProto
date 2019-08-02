@@ -1,1 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+    background-color: #666666;
+    color: #FFFFFF;
+}
+
+.logoutButton {
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+    right: 10px;
+
+}
+.xd {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    margin: 20px;
+    
+}
+.loginPanel {
+    margin: 15px;
+    background-color: blueviolet;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+#test {
+    margin: 40px;
+    padding: 15px;
+    
+}
