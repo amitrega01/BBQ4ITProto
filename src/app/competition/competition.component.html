@@ -1,24 +1,30 @@
-<h2>{{ _comp.name }}</h2>
-<form #addScore="ngForm" (ngSubmit)="onClickSubmit(addScore.value)">
-  <input type="text" name="nick" placeholder="Nick" ngModel />
-  <br />
-  <input type="number" name="points" placeholder="Punkty" ngModel />
-  <br />
-  <input type="submit" value="submit" />
-</form>
-<div *ngIf="results != undefined">
-  <table>
-    <!-- Nick Column -->
-    <tr>
-      <th>Nick</th>
-      <th>Score</th>
-    </tr>
-    <tr *ngFor="let item of results | async">
-      <td>{{ item.nick }}</td>
+<div class="col">
+  <h2>{{ _comp.name }}</h2>
+  <form [formGroup]="addScore" (ngSubmit)="onClickSubmit()">
+    <input type="text" formControlName="nick" placeholder="Nick" />
+    <br />
+    <input type="number" formControlName="score" placeholder="Punkty" />
+    <br />
+    <input type="submit" value="submit" />
+  </form>
+  <div *ngIf="results != undefined">
+    <table class="table table-striped">
+      <!-- Nick Column -->
+      <thead>
+        <tr>
+          <th scope="col" sortable="nick" (sort)="onSort($event)">Nick</th>
+          <th scope="col" sortable="score" (sort)="onSort($event)">Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of results | async">
+          <td>{{ item.nick }}</td>
 
-      <!-- Score Column -->
+          <!-- Score Column -->
 
-      <td>{{ item.points }}</td>
-    </tr>
-  </table>
+          <td>{{ item.score }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

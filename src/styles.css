@@ -1,12 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
-@import '~@angular/material/prebuilt-themes/indigo-pink.css';
 .competitionList {
   list-style: none;
 }
 .competitionList li {
   float: left;
   margin: 8px;
-}
-table {
-  width: 100%;
 }

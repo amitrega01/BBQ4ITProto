@@ -1,11 +1,14 @@
-<button color="primary" mat-raised-button [matMenuTriggerFor]="menu">
-  Menu
-</button>
-<mat-menu #menu="matMenu">
-  <button *ngFor="let item of items | async" mat-menu-item (click)="changeCompetition(item)">
-    {{ item.name | json }}
-  </button>
-</mat-menu>
+<div class="col">
+  <div ngbDropdown class="d-inline-block">
+    <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Wybierz konkurencję</button>
+    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+      <button *ngFor="let item of items | async" ngbDropdownItem (click)="changeCompetition(item)">
+        {{ item.name | json }}
+      </button>
+    </div>
+  </div>
+</div>
+
 <div *ngIf="currentCompetition != undefined">
   <app-competition [comp]="currentCompetition"></app-competition>
 </div>
