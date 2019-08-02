@@ -9,8 +9,8 @@ import { environment } from "src/environments/environment";
 import { FormsModule } from "@angular/forms";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { CompetitionsComponent } from "./competitions/competitions.component";
-import { AngularFireDatabaseModule } from "@angular/fire/database";
 import { CompetitionComponent } from "./competition/competition.component";
+import { AngularFirestoreModule } from "@angular/fire/firestore";
 
 @NgModule({
   declarations: [AppComponent, CompetitionsComponent, CompetitionComponent],
@@ -19,7 +19,7 @@ import { CompetitionComponent } from "./competition/competition.component";
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    AngularFireDatabaseModule,
+    AngularFirestoreModule,
     FormsModule
   ],
   providers: [],

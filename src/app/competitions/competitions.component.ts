@@ -1,6 +1,12 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { Observable } from "rxjs";
-import { AngularFireDatabase } from "@angular/fire/database";
+import {
+  AngularFirestore,
+  AngularFirestoreDocument,
+  AngularFirestoreCollection
+} from "@angular/fire/firestore";
+import { Competition } from "../Competition";
+
 @Component({
   selector: "app-competitions",
   template: `
@@ -17,10 +23,12 @@ import { AngularFireDatabase } from "@angular/fire/database";
   `
 })
 export class CompetitionsComponent {
-  items: Observable<any[]>;
+  private itemsDoc: AngularFirestoreCollection<Competition>;
+  items: Observable<Competition[]>;
   currentCompetition: any;
-  constructor(db: AngularFireDatabase) {
-    this.items = db.list("competitions").valueChanges();
+  constructor(private afs: AngularFirestore) {
+    this.itemsDoc = afs.collection("competitions");
+    this.items = this.itemsDoc.valueChanges();
   }
   changeCompetition(item) {
     console.log(item);
