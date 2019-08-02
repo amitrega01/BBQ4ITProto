@@ -2,11 +2,7 @@
   Menu
 </button>
 <mat-menu #menu="matMenu">
-  <button
-    *ngFor="let item of items | async"
-    mat-menu-item
-    (click)="changeCompetition(item)"
-  >
+  <button *ngFor="let item of items | async" mat-menu-item (click)="changeCompetition(item)">
     {{ item.name | json }}
   </button>
 </mat-menu>

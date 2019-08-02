@@ -1,9 +1,9 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from '@angular/core';
 
-import { AngularFireAuth } from "@angular/fire/auth";
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
-  selector: "app-root",
+  selector: 'app-root',
   template: `
     <div *ngIf="afAuth.user | async as user; else showLogin">
       <app-competitions></app-competitions>
@@ -26,14 +26,12 @@ export class AppComponent {
   constructor(public afAuth: AngularFireAuth) {}
 
   ngOnInit() {
-    console.log("Init");
+    console.log('Init');
   }
   onClickSubmit(data) {
-    this.afAuth.auth
-      .signInWithEmailAndPassword(data.email, data.password)
-      .then(res => {
-        console.log(res);
-      });
+    this.afAuth.auth.signInWithEmailAndPassword(data.email, data.password).then(res => {
+      console.log(res);
+    });
   }
   login() {}
   logout() {

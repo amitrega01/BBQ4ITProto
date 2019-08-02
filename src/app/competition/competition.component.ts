@@ -1,17 +1,13 @@
-import { Component, OnInit, Input } from "@angular/core";
-import {
-  AngularFirestore,
-  AngularFirestoreDocument,
-  AngularFirestoreCollection
-} from "@angular/fire/firestore";
-import { Competition } from "../interfaces/Competition";
-import { Score } from "../interfaces/Score";
-import { Observable } from "rxjs";
-import { MatTableDataSource } from "@angular/material/table";
+import { Component, OnInit, Input } from '@angular/core';
+import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { Competition } from '../interfaces/Competition';
+import { Score } from '../interfaces/Score';
+import { Observable } from 'rxjs';
+import { MatTableDataSource } from '@angular/material/table';
 @Component({
-  selector: "app-competition",
-  templateUrl: "./competition.component.html",
-  styleUrls: ["./competition.component.css"]
+  selector: 'app-competition',
+  templateUrl: './competition.component.html',
+  styleUrls: ['./competition.component.css']
 })
 export class CompetitionComponent implements OnInit {
   _comp: Competition;
@@ -22,9 +18,7 @@ export class CompetitionComponent implements OnInit {
     if (comp != undefined) {
       this._comp = comp;
 
-      this.results = this.afs
-        .collection<Score>(this._comp.route)
-        .valueChanges();
+      this.results = this.afs.collection<Score>(this._comp.route).valueChanges();
     }
   }
   get comp() {
