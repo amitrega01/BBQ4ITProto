@@ -5,22 +5,11 @@ import {
   AngularFirestoreDocument,
   AngularFirestoreCollection
 } from "@angular/fire/firestore";
-import { Competition } from "../Competition";
+import { Competition } from "../interfaces/Competition";
 
 @Component({
   selector: "app-competitions",
-  template: `
-    <ul>
-      <nav>
-        <li *ngFor="let item of items | async">
-          <button (click)="changeCompetition(item)">
-            {{ item.name | json }}
-          </button>
-        </li>
-      </nav>
-    </ul>
-    <app-competition [comp]="currentCompetition"></app-competition>
-  `
+  templateUrl: "./competitions.component.html"
 })
 export class CompetitionsComponent {
   private itemsDoc: AngularFirestoreCollection<Competition>;
