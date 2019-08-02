@@ -4,32 +4,27 @@ import {
   AngularFirestoreDocument,
   AngularFirestoreCollection
 } from "@angular/fire/firestore";
-import { Competition } from "../Competition";
-import { Score } from "../Score";
+import { Competition } from "../interfaces/Competition";
+import { Score } from "../interfaces/Score";
+import { Observable } from "rxjs";
+import { MatTableDataSource } from "@angular/material/table";
 @Component({
   selector: "app-competition",
-  template: `
-    <div *ngIf="_comp != undefined">
-      <h2>{{ _comp.name }}</h2>
-      <form #addScore="ngForm" (ngSubmit)="onClickSubmit(addScore.value)">
-        <input type="text" name="nick" placeholder="Nick" ngModel />
-        <br />
-        <input type="number" name="points" placeholder="Punkty" ngModel />
-        <br />
-        <input type="submit" value="submit" />
-      </form>
-    </div>
-  `,
+  templateUrl: "./competition.component.html",
   styleUrls: ["./competition.component.css"]
 })
 export class CompetitionComponent implements OnInit {
   _comp: Competition;
   afs: AngularFirestore;
-
+  results: Observable<Score[]>;
   @Input()
   set comp(comp: Competition) {
     if (comp != undefined) {
       this._comp = comp;
+
+      this.results = this.afs
+        .collection<Score>(this._comp.route)
+        .valueChanges();
     }
   }
   get comp() {

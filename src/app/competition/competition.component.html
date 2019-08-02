@@ -1,1 +1,24 @@
-<p>competition works!</p>
+<h2>{{ _comp.name }}</h2>
+<form #addScore="ngForm" (ngSubmit)="onClickSubmit(addScore.value)">
+  <input type="text" name="nick" placeholder="Nick" ngModel />
+  <br />
+  <input type="number" name="points" placeholder="Punkty" ngModel />
+  <br />
+  <input type="submit" value="submit" />
+</form>
+<div *ngIf="results != undefined">
+  <table>
+    <!-- Nick Column -->
+    <tr>
+      <th>Nick</th>
+      <th>Score</th>
+    </tr>
+    <tr *ngFor="let item of results | async">
+      <td>{{ item.nick }}</td>
+
+      <!-- Score Column -->
+
+      <td>{{ item.points }}</td>
+    </tr>
+  </table>
+</div>

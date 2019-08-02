@@ -1,5 +1,15 @@
-<ul>
-  <li *ngFor="let item of competitions | async">
-    {{ item | json }}
-  </li>
-</ul>
+<button color="primary" mat-raised-button [matMenuTriggerFor]="menu">
+  Menu
+</button>
+<mat-menu #menu="matMenu">
+  <button
+    *ngFor="let item of items | async"
+    mat-menu-item
+    (click)="changeCompetition(item)"
+  >
+    {{ item.name | json }}
+  </button>
+</mat-menu>
+<div *ngIf="currentCompetition != undefined">
+  <app-competition [comp]="currentCompetition"></app-competition>
+</div>
