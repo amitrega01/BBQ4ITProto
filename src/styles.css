@@ -88,5 +88,10 @@ body {
 }
 .buttonss {
   margin: 0 auto;
-  color: #777775;
+  color: white;
+}
+#dropdownBasic1
+{
+    background-color: #666666;
+    border-color: #333333;
 }
