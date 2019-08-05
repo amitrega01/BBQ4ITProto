@@ -13,6 +13,7 @@
         <tr>
           <th scope="col" sortable="nick" (sort)="onSort($event)">Nick</th>
           <th scope="col" sortable="score" (sort)="onSort($event)">Score</th>
+          <th style="text-align: center">Delete</th>
         </tr>
       </thead>
       <tbody>
@@ -22,8 +23,44 @@
           <!-- Score Column -->
 
           <td>{{ item.score }}</td>
+          <td style="text-align: center">
+            <span class="deleteBtn" (click)="open(content, item)"
+              ><i class="fa fa-ellipsis-h" style="font-size:20px;"></i
+            ></span>
+          </td>
         </tr>
       </tbody>
     </table>
   </div>
 </div>
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Edycja wyniku</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div
+      class="form-group"
+      style="display: flex; flex-direction: column; justify-content: stretch; align-content: stretch;margin: none; padding: none"
+    >
+      <form
+        style="display: flex; flex-wrap: wrap; align-items: stretch"
+        [formGroup]="updateScoreForm"
+        (ngSubmit)="updateScore()"
+      >
+        <input class="scoreInput" type="text" formControlName="nick" placeholder="Nick" />
+
+        <input class="scoreInput" type="number" formControlName="score" placeholder="Punkty" />
+
+        <input class="scoreInput" style="width: 100%" type="submit" value="Zapisz" />
+      </form>
+
+      <button class="deleteScoreBtn" (click)="deleteScore()">Usuń wpis</button>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+  </div>
+</ng-template>
