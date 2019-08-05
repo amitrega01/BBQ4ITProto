@@ -31,32 +31,28 @@ import { AngularFireAuth } from '@angular/fire/auth';
       </div>
     </nav>
 
-    <div class="xd">
-      <div *ngIf="afAuth.user | async as user; else showLogin">
-        <app-competitions></app-competitions>
-      </div>
-
-      <div class="loginPanel">
-        <ng-template #showLogin>
-          <div id="test">
-            <form #userlogin="ngForm" (ngSubmit)="onClickSubmit(userlogin.value)">
-              <h2>Login panel</h2>
-              <br />
-              <input type="text" name="email" placeholder="Email" ngModel />
-              <br />
-              <input type="password" name="password" placeholder="Password" ngModel />
-              <br />
-              <input type="submit" value="submit" />
-            </form>
-          </div>
-        </ng-template>
-      </div>
+    <div *ngIf="afAuth.user | async as user; else showLogin">
+      <app-competitions></app-competitions>
     </div>
+    <ng-template #showLogin>
+      <div class="loginPanel">
+        <form #userlogin="ngForm" (ngSubmit)="onClickSubmit(userlogin.value)">
+          <h2>Login panel</h2>
+          <br />
+          <input type="text" name="email" placeholder="Email" ngModel />
+          <br />
+          <input type="password" name="password" placeholder="Password" ngModel />
+          <br />
+          <input class="btn-primary" type="submit" value="Zaloguj" />
+        </form>
+      </div>
+    </ng-template>
   `
 })
 export class AppComponent {
   email: string;
   password: string;
+
   constructor(public afAuth: AngularFireAuth) {}
 
   onClickSubmit(data) {
