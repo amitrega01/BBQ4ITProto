@@ -21,7 +21,7 @@ export class CompetitionComponent implements OnInit {
 
   @Input()
   set comp(comp: Competition) {
-    if (comp != undefined) {
+    if (comp !== undefined) {
       this._comp = comp;
       this.results = this.afs.collection<Score>(this._comp.route, ref => ref.orderBy('score', 'desc')).valueChanges();
 

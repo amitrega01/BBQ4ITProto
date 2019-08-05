@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { AngularFireAuth } from '@angular/fire/auth';
 
@@ -59,9 +59,6 @@ export class AppComponent {
   password: string;
   constructor(public afAuth: AngularFireAuth) {}
 
-  ngOnInit() {
-    console.log('Init');
-  }
   onClickSubmit(data) {
     this.afAuth.auth
       .signInWithEmailAndPassword(data.email, data.password)
