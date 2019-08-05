@@ -99,6 +99,7 @@ body {
 }
 .buttonss {
   margin: 0 auto;
+  color: white;
 }
 
 .deleteBtn {
@@ -118,4 +119,8 @@ body {
 img {
   width: 75px;
   height: auto;
+}
+#dropdownBasic1 {
+  background-color: #666666;
+  border-color: #333333;
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 
 import { AngularFireAuth } from '@angular/fire/auth';
 
@@ -6,7 +6,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
   selector: 'app-root',
   template: `
     <div class="navbar">
-    <img src="../assets/logo.png" alt="bbq" height="50" width="50">
+      <img src="../assets/logo.png" alt="bbq" height="50" width="50" />
       <button class="logoutButton" *ngIf="afAuth.user | async as user" (click)="onClickLogout()">
         <i class="fa fa-sign-out" style="font-size:20px;color:white"></i>
         Logout
@@ -34,7 +34,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 export class AppComponent {
   email: string;
   password: string;
-
+  alertVisible: boolean = false;
+  alertContent: string;
   constructor(public afAuth: AngularFireAuth) {}
 
   onClickSubmit(data) {
@@ -44,7 +45,8 @@ export class AppComponent {
         console.log(res);
       })
       .catch(error => {
-        alert(error.message);
+        this.alertContent = error.message;
+        this.alertVisible = true;
       });
   }
   onClickLogout() {
@@ -54,5 +56,8 @@ export class AppComponent {
   login() {}
   logout() {
     this.afAuth.auth.signOut();
+  }
+  closeAlert() {
+    this.alertVisible = false;
   }
 }
