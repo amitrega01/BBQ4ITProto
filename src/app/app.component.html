@@ -1,6 +1,6 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="navbar">
-  BBQ4.IT
+  <img src="../assets/logo.png" alt="bbq" height="50" width="50" />
   <button class="logoutButton" *ngIf="afAuth.user | async as user" (click)="onClickLogout()">
     <i class="fa fa-sign-out" style="font-size:20px;color:white"></i>
     Logout
@@ -21,19 +21,15 @@
 
       <input class="loginInput" type="submit" value="Zaloguj" />
     </form>
-    <br/>
+    <br />
 
-    
     <div *ngIf="alertVisible">
-        <div #alert class="alert alert-danger alert-dismissible fade show" role="alert">
-            <button type="button" class="close" aria-label="Close" (click)="closeAlert()">
-              <span aria-hidden="true">&times;</span>
-            </button>
-            {{alertContent}}
-        </div>
-    </div>  
-
+      <div #alert class="alert alert-danger alert-dismissible fade show" role="alert">
+        <button type="button" class="close" aria-label="Close" (click)="closeAlert()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        {{ alertContent }}
+      </div>
+    </div>
   </div>
-
-  
 </ng-template>
