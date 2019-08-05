@@ -114,3 +114,8 @@ body {
 .deleteBtn:active {
   background-color: rgba(0, 0, 0, 0.5);
 }
+
+img {
+  width: 75px;
+  height: auto;
+}

@@ -6,7 +6,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
   selector: 'app-root',
   template: `
     <div class="navbar">
-      BBQ4.IT
+    <img src="../assets/logo.png" alt="bbq" height="50" width="50">
       <button class="logoutButton" *ngIf="afAuth.user | async as user" (click)="onClickLogout()">
         <i class="fa fa-sign-out" style="font-size:20px;color:white"></i>
         Logout
