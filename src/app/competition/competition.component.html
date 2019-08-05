@@ -1,10 +1,10 @@
 <div class="col">
   <form id="addScoreForm" [formGroup]="addScore" (ngSubmit)="onClickSubmit()">
     <input class="scoreInput" type="text" formControlName="nick" placeholder="Nick" />
-    <br />
+
     <input class="scoreInput" type="number" formControlName="score" placeholder="Punkty" />
-    <br />
-    <input type="submit" value="submit" />
+
+    <input class="scoreInput" type="submit" value="submit" />
   </form>
   <div *ngIf="results != undefined">
     <table class="table table-striped">

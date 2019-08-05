@@ -27,17 +27,18 @@ body {
   width: 100%;
   justify-content: stretch;
 }
-form {
+.loginForm {
   display: flex;
   flex-direction: column;
   z-index: 1;
+  align-content: space-between;
   background: #ffffff;
   padding: 45px;
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 2px 3px 0 rgba(0, 0, 0, 0.24);
   border-radius: 16px;
 }
-input {
+.loginInput {
   font-family: 'Roboto', sans-serif;
   border: 1px solid #ddd;
   border-radius: 4px;
@@ -50,9 +51,21 @@ input {
 }
 
 #addScoreForm {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   background: none;
   box-shadow: none;
+  align-content: space-around;
 }
 .scoreInput {
-  float: left;
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  align-content: space-between;
 }
