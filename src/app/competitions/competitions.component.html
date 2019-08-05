@@ -1,8 +1,7 @@
 <div class="col">
   <div ngbDropdown class="d-inline-block">
-    <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>
-      <span *ngIf="currentCompetition != undefined">{{ currentCompetition.name }}</span>
-      <span *ngIf="currentCompetition == undefined">Wybierz konkurencję</span>
+    <button class="btn btn-outline-primary buttonss" id="dropdownBasic1" ngbDropdownToggle>
+      {{ selectedcompetition }}
     </button>
     <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
       <button *ngFor="let item of items | async" ngbDropdownItem (click)="changeCompetition(item)">

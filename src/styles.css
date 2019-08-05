@@ -69,3 +69,23 @@ body {
   flex-direction: row;
   align-content: space-between;
 }
+.navbar {
+  background-color: #555555;
+  height: 60px;
+  color: white;
+  font-size: 20px;
+}
+.logoutButton {
+  background: transparent;
+  color: white;
+}
+.btn {
+  border-color: #555555;
+}
+.btn-outline-primary {
+  background-color: #777777;
+  color: white;
+}
+.buttonss {
+  margin: 0 auto;
+}

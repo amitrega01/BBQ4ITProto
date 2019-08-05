@@ -15,8 +15,12 @@ export class CompetitionsComponent {
     this.itemsDoc = afs.collection('competitions');
     this.items = this.itemsDoc.valueChanges();
   }
+
+  selectedcompetition: String = "Wybierz konkuręcje";
+    
   changeCompetition(item) {
     console.log(item);
-    this.currentCompetition = item;
+    this.currentCompetition = item; 
+    this.selectedcompetition = item.name;
   }
 }
