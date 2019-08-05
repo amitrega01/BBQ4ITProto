@@ -25,13 +25,6 @@
 
     
     <div *ngIf="alertVisible">
-        <!-- <p *ngFor="let alert of alerts">
-            <ngb-alert [type]="warning" (close)="close(alert)">{{errorMessage}}</ngb-alert>
-        </p>
-        <p>
-          <button type="button" class="btn btn-primary" (click)="reset()">{{errorMessage}}</button>
-        </p> -->
-
         <div #alert class="alert alert-danger alert-dismissible fade show" role="alert">
             <button type="button" class="close" aria-label="Close" (click)="closeAlert()">
               <span aria-hidden="true">&times;</span>
