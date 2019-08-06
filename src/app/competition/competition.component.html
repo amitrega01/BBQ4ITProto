@@ -13,15 +13,12 @@
         <tr>
           <th scope="col" sortable="nick" (sort)="onSort($event)">Nick</th>
           <th scope="col" sortable="score" (sort)="onSort($event)">Score</th>
-          <th style="text-align: center">Delete</th>
+          <th style="text-align: center">More</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let item of results | async">
           <td>{{ item.nick }}</td>
-
-          <!-- Score Column -->
-
           <td>{{ item.score }}</td>
           <td style="text-align: center">
             <span class="deleteBtn" (click)="open(content, item)"
@@ -46,21 +43,24 @@
       style="display: flex; flex-direction: column; justify-content: stretch; align-content: stretch;margin: none; padding: none"
     >
       <form
-        style="display: flex; flex-wrap: wrap; align-items: stretch"
+        style="display: flex; flex-wrap: wrap;flex-direction: column; "
         [formGroup]="updateScoreForm"
         (ngSubmit)="updateScore()"
       >
         <input class="scoreInput" type="text" formControlName="nick" placeholder="Nick" />
 
         <input class="scoreInput" type="number" formControlName="score" placeholder="Punkty" />
+        <div style="flex: 1; padding: 8px; flex-direction: column; width: 100%">
+          <span>Data dodania: {{ currentItem.added }}</span>
+          <br />
 
-        <input class="scoreInput" style="width: 100%" type="submit" value="Zapisz" />
+          <span>Dodane przez: {{ currentItem.postedBy }}</span>
+        </div>
+
+        <input class="scoreInput" type="submit" value="Zapisz" />
       </form>
 
       <button class="deleteScoreBtn" (click)="deleteScore()">Usuń wpis</button>
     </div>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
   </div>
 </ng-template>

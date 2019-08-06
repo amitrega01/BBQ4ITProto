@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Competition } from '../interfaces/Competition';
@@ -16,11 +16,11 @@ export class CompetitionsComponent {
     this.items = this.itemsDoc.valueChanges();
   }
 
-  selectedcompetition: String = "Wybierz konkuręcje";
-    
+  selectedcompetition: String = 'Wybierz konkurencję';
+
   changeCompetition(item) {
     console.log(item);
-    this.currentCompetition = item; 
+    this.currentCompetition = item;
     this.selectedcompetition = item.name;
   }
 }

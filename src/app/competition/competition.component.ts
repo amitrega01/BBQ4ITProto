@@ -5,6 +5,7 @@ import { Score } from '../interfaces/Score';
 import { Observable } from 'rxjs';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-competition',
@@ -22,7 +23,9 @@ export class CompetitionComponent {
 
   updateScoreForm = new FormGroup({
     nick: new FormControl(''),
-    score: new FormControl('')
+    score: new FormControl(''),
+    added: new FormControl(''),
+    postedBy: new FormControl('')
   });
 
   closeResult: string;
@@ -40,7 +43,7 @@ export class CompetitionComponent {
   get comp() {
     return this._comp;
   }
-  constructor(afs: AngularFirestore, private modalService: NgbModal) {
+  constructor(afs: AngularFirestore, private modalService: NgbModal, public afAuth: AngularFireAuth) {
     this.afs = afs;
   }
 
@@ -94,9 +97,14 @@ export class CompetitionComponent {
     console.log(event);
   }
   onClickSubmit() {
-    console.log(this.addScore.value);
-
-    this.afs.collection(this._comp.route).add(this.addScore.value);
+    var toAdd: Score = {
+      score: this.addScore.value.score,
+      nick: this.addScore.value.nick,
+      added: new Date(),
+      postedBy: this.afAuth.auth.currentUser.email
+    };
+    console.log(toAdd);
+    this.afs.collection(this._comp.route).add(toAdd);
     this.addScore.reset();
   }
 
