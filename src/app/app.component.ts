@@ -9,7 +9,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 export class AppComponent {
   email: string;
   password: string;
-  alertVisible: boolean = false;
+  alertVisible = false;
   alertContent: string;
   constructor(public afAuth: AngularFireAuth) {}
 
