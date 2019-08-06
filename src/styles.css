@@ -124,3 +124,54 @@ img {
   background-color: #666666;
   border-color: #333333;
 }
+.comp {
+  width: 300px;
+  font-size: 20px;
+}
+
+
+
+
+.bt{
+  background: #666666;
+  color: #fdfdfd;
+  min-height: 35px;
+  margin: 0;
+  border-radius: 3px;
+  border: 0;
+  line-height: 35px;
+  text-align: center;
+  margin: .5em 0 .5em 0;
+  width: 300px;
+
+}
+
+a.bt{
+  display: inline;
+  padding: 7px 10px 7px 10px;
+}
+
+.bt:hover{
+  background: #ffffff;
+}
+
+@media only screen and (max-width:480px) { 
+  .bt {
+    width: 100%;
+  }
+  
+  a.bt{
+    display: block;
+    padding: 0;
+  }
+}
+.tabelBg {
+  background-color: #ffffff;
+ 
+}
+.testowa {
+  position: absolute;
+  
+  margin-left: auto;
+  margin-right: auto;
+}
