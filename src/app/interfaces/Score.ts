@@ -1,6 +1,6 @@
 export interface Score {
   nick: string;
   score: number;
-  added: Date;
+  added: string;
   postedBy: string;
 }

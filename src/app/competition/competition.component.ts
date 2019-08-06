@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFireAuth } from '@angular/fire/auth';
-
+import * as moment from 'moment';
 @Component({
   selector: 'app-competition',
   templateUrl: './competition.component.html',
@@ -100,7 +100,7 @@ export class CompetitionComponent {
     var toAdd: Score = {
       score: this.addScore.value.score,
       nick: this.addScore.value.nick,
-      added: new Date(),
+      added: moment(new Date()).format('hh:mm DD-MM-YYYY'),
       postedBy: this.afAuth.auth.currentUser.email
     };
     console.log(toAdd);
