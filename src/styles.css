@@ -124,3 +124,10 @@ img {
   background-color: #666666;
   border-color: #333333;
 }
+
+.reklog{
+  height: auto;
+  width:150px;
+  margin-left: auto;
+  margin-right: auto;
+}
