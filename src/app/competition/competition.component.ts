@@ -13,6 +13,8 @@ import * as moment from 'moment';
   styleUrls: ['./competition.component.css']
 })
 export class CompetitionComponent {
+  alertVisible = false;
+  alertContent = '';
   _comp: Competition;
   afs: AngularFirestore;
   results: any;
@@ -97,15 +99,26 @@ export class CompetitionComponent {
     console.log(event);
   }
   onClickSubmit() {
-    var toAdd: Score = {
-      score: this.addScore.value.score,
-      nick: this.addScore.value.nick,
-      added: moment(new Date()).format('hh:mm DD-MM-YYYY'),
-      postedBy: this.afAuth.auth.currentUser.email
-    };
-    console.log(toAdd);
-    this.afs.collection(this._comp.route).add(toAdd);
-    this.addScore.reset();
+    if (this.addScore.value.nick == '' || this.addScore.value.nick == null) {
+      this.alertVisible = true;
+      this.alertContent = 'Uzupełnij pole Nick';
+      return;
+    } else if (this.addScore.value.score == '' || this.addScore.value.score == null) {
+      this.alertVisible = true;
+      this.alertContent = 'Uzupełnij pole punkty';
+      return;
+    } else {
+      this.alertVisible ? (this.alertVisible = false) : (this.alertVisible = false);
+      var toAdd: Score = {
+        score: this.addScore.value.score,
+        nick: this.addScore.value.nick,
+        added: moment(new Date()).format('hh:mm DD-MM-YYYY'),
+        postedBy: this.afAuth.auth.currentUser.email
+      };
+      console.log(toAdd);
+      this.afs.collection(this._comp.route).add(toAdd);
+      this.addScore.reset();
+    }
   }
 
   open(content, item: Score) {
@@ -120,7 +133,7 @@ export class CompetitionComponent {
       }
     );
   }
-
+  closeWarning = () => (this.alertVisible = false);
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
