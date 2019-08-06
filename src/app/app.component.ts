@@ -1,6 +1,7 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 
 import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,9 @@ export class AppComponent {
   password: string;
   alertVisible = false;
   alertContent: string;
-  constructor(public afAuth: AngularFireAuth) {}
+  constructor(public afAuth: AngularFireAuth, afs: AngularFirestore) {
+    afs.collection('competitions').get();
+  }
 
   onClickSubmit(data) {
     this.afAuth.auth

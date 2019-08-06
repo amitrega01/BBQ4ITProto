@@ -1,4 +1,10 @@
 <div class="col">
+  <div *ngIf="alertVisible" class="alert alert-warning" role="alert">
+    <strong>Warning! </strong>{{ alertContent
+    }}<button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeWarning()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
   <form id="addScoreForm" [formGroup]="addScore" (ngSubmit)="onClickSubmit()">
     <input class="scoreInput" type="text" formControlName="nick" placeholder="Nick" />
 
