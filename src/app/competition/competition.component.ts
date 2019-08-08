@@ -7,6 +7,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as moment from 'moment';
+import { ClassGetter } from '@angular/compiler/src/output/output_ast';
 @Component({
   selector: 'app-competition',
   templateUrl: './competition.component.html',
@@ -116,8 +117,26 @@ export class CompetitionComponent {
         postedBy: this.afAuth.auth.currentUser.email
       };
       console.log(toAdd);
-      this.afs.collection(this._comp.route).add(toAdd);
-      this.addScore.reset();
+      fetch(`https://us-central1-bbq4it-b4163.cloudfunctions.net/api/newScore/${this._comp.route}`, {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        mode: 'no-cors', // no-cors, cors, *same-origin
+        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: 'same-origin', // include, *same-origin, omit
+        headers: {
+          'Content-Type': 'application/json'
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        redirect: 'follow', // manual, *follow, error
+        referrer: 'no-referrer', // no-referrer, *client
+        body: JSON.stringify(toAdd) // body data type must match "Content-Type" header
+      })
+        .then((msg: any) => {
+          console.log(msg);
+          this.addScore.reset();
+        })
+        .catch((err: any) => {
+          console.log(err);
+        });
     }
   }
 
