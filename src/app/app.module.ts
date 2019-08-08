@@ -12,8 +12,10 @@ import { CompetitionComponent } from './competition/competition.component';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NavbarComponent } from './navbar/navbar.component';
+import { FooterComponent } from './footer/footer.component';
 @NgModule({
-  declarations: [AppComponent, CompetitionsComponent, CompetitionComponent],
+  declarations: [AppComponent, CompetitionsComponent, CompetitionComponent, NavbarComponent, FooterComponent],
   imports: [
     NgbModule,
     BrowserModule,

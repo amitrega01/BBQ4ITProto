@@ -1,5 +1,5 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div class="navbar">
+<!-- <div class="navbar">
   <img src="../assets/logo.png" alt="bbq" height="50" width="50" />
 
   
@@ -8,13 +8,34 @@
     <i class="fa fa-sign-out" style="font-size:20px;color:white"></i>
     Logout
   </button>
+</div> -->
+<div *ngIf="afAuth.user | async as user" class="navbarBg">
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark navbar2">
+    <img src="../assets/logo.png" alt="bbq" height="50" width="50" />
+    <button class="navbar-toggler navbarBg" type="button" aria-controls="navbarContent" [attr.aria-expanded]="!collapsed" aria-label="Toggle navigation" (click)="collapsed = !collapsed">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    
+    <div class="navbar-collapse black" [class.collapse]="collapsed" id="navbarContent">
+      <ul class="navbar-nav ml-auto">
+        
+          <li class="navbarBg" *ngFor="let item of items | async" ngbDropdownItem (click)="changeCompetition(item)">
+            {{ item.name | json }}
+          </li>
+      </ul>
+    </div>
+  </nav>
 </div>
-
-
-
+<br/>
 <div *ngIf="afAuth.user | async as user; else showLogin">
-  <app-competitions></app-competitions>
+  
+<div *ngIf="currentCompetition != undefined">
+  <app-competition [comp]="currentCompetition"></app-competition>
 </div>
+
+</div>
+<app-footer></app-footer>
 <ng-template #showLogin>
   <div class="loginPanel">
     <form class="loginForm" #userlogin="ngForm" (ngSubmit)="onClickSubmit(userlogin.value)">
