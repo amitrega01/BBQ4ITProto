@@ -7,10 +7,10 @@ const db = admin.firestore();
 const app = express();
 app.use(express.json());
 
-//https://us-central1-bbq4it-b4163.cloudfunctions.net/api/newScore/0oz0p3Ce11M8l3RMwLzM
+//https://us-central1-bbq4it-b4163.cloudfunctions.net/api/newScore/:route
 app.post('/newScore/:route', (req, res) => {
   db.collection(req.params.route)
-    .add(req.body)
+    .add(JSON.parse(req.body))
     .then((msg: any) => {
       console.log(msg);
       res.send(msg);
