@@ -21,6 +21,7 @@ export class AppComponent {
     afs.collection('competitions').get();
     this.itemsDoc = afs.collection('competitions');
     this.items = this.itemsDoc.valueChanges();
+   
   }
 
   @Output() changeComponent = new EventEmitter<any>();
