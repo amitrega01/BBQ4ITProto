@@ -21,7 +21,7 @@
       <ul class="navbar-nav ml-auto">
         
           <li class="navbarBg" *ngFor="let item of items | async" ngbDropdownItem (click)="changeCompetition(item)">
-            {{ item.name | json }}
+            {{ item.name}}
           </li>
       </ul>
     </div>
@@ -38,6 +38,9 @@
 <app-footer></app-footer>
 <ng-template #showLogin>
   <div class="loginPanel">
+      <img src="../assets/logo.png" alt="BBQ4.IT" height="1000" width="1000" />
+      <br/>
+      <br/>
     <form class="loginForm" #userlogin="ngForm" (ngSubmit)="onClickSubmit(userlogin.value)">
       <img src="../assets/rekord.png" class="reklog" alt="logo_rekord">
       
