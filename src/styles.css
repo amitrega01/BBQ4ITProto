@@ -207,3 +207,8 @@ a.bt {
 table {
   padding-bottom: 100px;
 }
+.loginPanelLogo {
+  max-height: 200px;
+  max-width: 200px;
+  object-fit: cover;
+}

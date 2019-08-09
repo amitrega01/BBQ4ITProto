@@ -30,6 +30,7 @@ export class AppComponent {
       .signInWithEmailAndPassword(data.email, data.password)
       .then(res => {
         console.log(res);
+        this.alertVisible = false;
       })
       .catch(error => {
         this.alertContent = error.message;
