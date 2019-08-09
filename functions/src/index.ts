@@ -8,7 +8,8 @@ const app = express();
 app.use(express.json());
 
 //https://us-central1-bbq4it-b4163.cloudfunctions.net/api/newScore/:route
-app.post('/newScore/:route', (req, res) => {
+
+app.post('/score/:route', (req, res) => {
   const toAdd = JSON.parse(req.body);
   db.collection(req.params.route)
     .where('nick', '==', toAdd.nick)
@@ -32,6 +33,24 @@ app.post('/newScore/:route', (req, res) => {
         });
     })
     .catch((err: any) => res.send({ type: 'ERROR', msg: err.msg }));
+});
+//TODO: naprawic delete
+app.delete('/score/:route', (req, res) => {
+  const toDelete = JSON.parse(req.body);
+  console.log(toDelete);
+  db.collection(req.params.route)
+    .where('added', '==', toDelete.added)
+    .where('nick', '==', toDelete.nick)
+    .where('score', '==', toDelete.score)
+    .get()
+    .then((snapshot: any) => {
+      console.log('Snapshot');
+      console.log(snapshot);
+      snapshot.forEach((element: any) => {
+        console.log('DELETED => ' + element.id);
+      });
+    });
+  res.send('check');
 });
 
 exports.api = functions.https.onRequest(app);
