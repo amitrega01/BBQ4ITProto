@@ -9,16 +9,29 @@ app.use(express.json());
 
 //https://us-central1-bbq4it-b4163.cloudfunctions.net/api/newScore/:route
 app.post('/newScore/:route', (req, res) => {
+  const toAdd = JSON.parse(req.body);
   db.collection(req.params.route)
-    .add(JSON.parse(req.body))
-    .then((msg: any) => {
-      console.log(msg);
-      res.send(msg);
+    .where('nick', '==', toAdd.nick)
+    .get()
+    .then((snapshot: any) => {
+      console.log(snapshot);
+      if (snapshot.empty) {
+        db.collection(req.params.route)
+          .add(toAdd)
+          .then((msg: any) => {
+            res.send({ type: 'OK', msg: 'Dodano wynik' });
+          })
+          .catch((error: any) => {
+            console.log(error);
+            res.send({ type: 'ERROR', msg: error.msg });
+          });
+      } else
+        res.send({
+          type: 'ERROR',
+          msg: 'Ta osoba jest już na liście'
+        });
     })
-    .catch((error: any) => {
-      console.log(error);
-      res.send(error);
-    });
+    .catch((err: any) => res.send({ type: 'ERROR', msg: err.msg }));
 });
 
 exports.api = functions.https.onRequest(app);

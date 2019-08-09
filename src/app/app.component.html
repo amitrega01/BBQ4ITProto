@@ -12,47 +12,37 @@
 <div *ngIf="afAuth.user | async as user" class="navbarBg">
   <nav class="navbar navbar-expand-md navbar-dark bg-dark navbar2">
     <img src="../assets/logo.png" alt="bbq" height="50" width="50" />
-    <button class="navbar-toggler navbarBg" type="button" aria-controls="navbarContent" [attr.aria-expanded]="!collapsed" aria-label="Toggle navigation" (click)="collapsed = !collapsed">
+    <button
+      class="navbar-toggler navbarBg"
+      type="button"
+      aria-controls="navbarContent"
+      [attr.aria-expanded]="!collapsed"
+      aria-label="Toggle navigation"
+      (click)="collapsed = !collapsed"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    
     <div class="navbar-collapse black" [class.collapse]="collapsed" id="navbarContent">
       <ul class="navbar-nav ml-auto">
-        
-          <li class="navbarBg" *ngFor="let item of items | async" ngbDropdownItem (click)="changeCompetition(item)">
-            {{ item.name}}
-          </li>
+        <li class="navbarBg" *ngFor="let item of items | async" ngbDropdownItem (click)="changeCompetition(item)">
+          {{ item.name }}
+        </li>
       </ul>
     </div>
   </nav>
 </div>
-<br/>
+<br />
 <div *ngIf="afAuth.user | async as user; else showLogin">
-  
-<div *ngIf="currentCompetition != undefined">
-  <app-competition [comp]="currentCompetition"></app-competition>
-</div>
-
+  <div *ngIf="currentCompetition != undefined">
+    <app-competition [comp]="currentCompetition"></app-competition>
+  </div>
 </div>
 <app-footer></app-footer>
 <ng-template #showLogin>
   <div class="loginPanel">
-      <img src="../assets/logo.png" alt="BBQ4.IT" height="1000" width="1000" />
-      <br/>
-      <br/>
-    <form class="loginForm" #userlogin="ngForm" (ngSubmit)="onClickSubmit(userlogin.value)">
-      <img src="../assets/rekord.png" class="reklog" alt="logo_rekord">
-      
-      <br />
-      <input class="loginInput" type="text" name="email" placeholder="Email" ngModel />
-
-      <input class="loginInput" type="password" name="password" placeholder="Password" ngModel />
-
-      <input class="loginInput" type="submit" value="Zaloguj" />
-    </form>
+    <img src="../assets/logo.png" alt="BBQ4.IT" height="1000" width="1000" />
     <br />
-
     <div *ngIf="alertVisible">
       <div #alert class="alert alert-danger alert-dismissible fade show" role="alert">
         <button type="button" class="close" aria-label="Close" (click)="closeAlert()">
@@ -61,5 +51,17 @@
         {{ alertContent }}
       </div>
     </div>
+    <br />
+    <form class="loginForm" #userlogin="ngForm" (ngSubmit)="onClickSubmit(userlogin.value)">
+      <img src="../assets/rekord.png" class="reklog" alt="logo_rekord" />
+
+      <br />
+      <input class="loginInput" type="text" name="email" placeholder="Email" ngModel />
+
+      <input class="loginInput" type="password" name="password" placeholder="Password" ngModel />
+
+      <input class="loginInput" type="submit" value="Zaloguj" />
+    </form>
+    <br />
   </div>
 </ng-template>

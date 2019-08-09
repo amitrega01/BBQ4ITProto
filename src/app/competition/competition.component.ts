@@ -117,7 +117,7 @@ export class CompetitionComponent {
         postedBy: this.afAuth.auth.currentUser.email
       };
       console.log(toAdd);
-      fetch(`https://us-central1-bbq4it-b4163.cloudfunctions.net/api/newScore/${this._comp.route}`, {
+      fetch(`https://us-central1-bbq4it-b4163.cloudfunctions.net/api/score/${this._comp.route}`, {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
         mode: 'no-cors', // no-cors, cors, *same-origin
         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached

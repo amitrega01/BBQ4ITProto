@@ -10,7 +10,7 @@
 
     <input class="scoreInput" type="number" formControlName="score" placeholder="Punkty" />
 
-    <input class="scoreInput" type="submit" value="submit" />
+    <input class="scoreInput" type="submit" value="Dodaj" />
   </form>
   <div *ngIf="results != undefined">
     <table class="table table-striped">
@@ -34,9 +34,8 @@
         </tr>
       </tbody>
     </table>
-    <br/>
-    <br/>
-    
+    <br />
+    <br />
   </div>
 </div>
 <ng-template #content let-modal>
