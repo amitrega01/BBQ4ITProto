@@ -1,25 +1,39 @@
 import * as functions from 'firebase-functions';
 import * as express from 'express';
-
+const cors = require('cors');
 const admin = require('firebase-admin');
-admin.initializeApp(functions.config().firebase);
+
+admin.initializeApp();
+
 const db = admin.firestore();
 const app = express();
 app.use(express.json());
-
+app.use(
+  cors({
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE'
+  })
+);
+app.use(function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  next();
+});
 //https://us-central1-bbq4it-b4163.cloudfunctions.net/api/newScore/:route
 
 app.post('/score/:route', (req, res) => {
-  const toAdd = JSON.parse(req.body);
   db.collection(req.params.route)
-    .where('nick', '==', toAdd.nick)
+    .where('nick', '==', req.body.nick)
     .get()
     .then((snapshot: any) => {
       console.log(snapshot);
       if (snapshot.empty) {
         db.collection(req.params.route)
-          .add(toAdd)
-          .then((msg: any) => {
+          .add(req.body)
+          .then((docRef: any) => {
+            db.collection(req.params.route)
+              .doc(docRef.id)
+              .update({ id: docRef.id, ...req.body });
             res.send({ type: 'OK', msg: 'Dodano wynik' });
           })
           .catch((error: any) => {
@@ -35,22 +49,42 @@ app.post('/score/:route', (req, res) => {
     .catch((err: any) => res.send({ type: 'ERROR', msg: err.msg }));
 });
 //TODO: naprawic delete
-app.delete('/score/:route', (req, res) => {
-  const toDelete = JSON.parse(req.body);
-  console.log(toDelete);
-  db.collection(req.params.route)
-    .where('added', '==', toDelete.added)
-    .where('nick', '==', toDelete.nick)
-    .where('score', '==', toDelete.score)
-    .get()
-    .then((snapshot: any) => {
-      console.log('Snapshot');
-      console.log(snapshot);
-      snapshot.forEach((element: any) => {
-        console.log('DELETED => ' + element.id);
+app.put('/score/:route/:id', (req, res) => {
+  console.log(req.body);
+  if (req.body == null) {
+    db.collection(req.params.route)
+      .doc(req.params.id)
+      .delete()
+      .then((ref: any) => {
+        res.send({ type: 'OK', msg: 'Usunięto wpis' });
+      })
+      .catch((error: any) => {
+        res.send({ type: 'ERROR', msg: 'Błąd ' + error.msg });
       });
-    });
-  res.send('check');
+  } else {
+    const nickToCheck = req.body.new.nick === req.body.old.nick ? req.body.old.nick : req.body.new.nick;
+    db.collection(req.params.route)
+      .where('nick', '==', nickToCheck)
+      .get()
+      .then((snapshot: any) => {
+        console.log(snapshot);
+        if (snapshot.empty) {
+          db.collection(req.params.route)
+            .doc(req.params.id)
+            .update(req.body)
+            .then((ref: any) => {
+              res.send({ type: 'OK', msg: 'Zaaktualizowano wpis' });
+            })
+            .catch((error: any) => {
+              res.send({ type: 'ERROR', msg: 'Błąd ' + error.msg });
+            });
+        } else {
+          res.send({
+            type: 'ERROR',
+            msg: 'Ta osoba jest już na liście'
+          });
+        }
+      });
+  }
 });
-
 exports.api = functions.https.onRequest(app);

@@ -1,6 +1,10 @@
 <div class="col">
-  <div *ngIf="alertVisible" class="alert alert-warning" role="alert">
-    <strong>Warning! </strong>{{ alertContent
+  <div
+    *ngIf="alertVisible"
+    class="{{ alertType === 'success' ? 'alert alert-success' : 'alert alert-warning' }}"
+    role="alert"
+  >
+    {{ alertContent
     }}<button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeWarning()">
       <span aria-hidden="true">&times;</span>
     </button>

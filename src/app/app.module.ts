@@ -12,6 +12,7 @@ import { CompetitionComponent } from './competition/competition.component';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HttpClientModule } from '@angular/common/http';
 
 import { FooterComponent } from './footer/footer.component';
 @NgModule({
@@ -25,7 +26,8 @@ import { FooterComponent } from './footer/footer.component';
     AngularFireAuthModule,
     AngularFirestoreModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
