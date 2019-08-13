@@ -10,11 +10,17 @@
     <div class="navbar-collapse collapse black" [class.collapse]="collapsed" id="navbarContent navbarNavAltMarkup">
       <ul class="navbar-nav ml-auto">
         
+<<<<<<< HEAD
   
           <button [class.selected]="item === currentCompetition" class="navbarBg btn btn-primary navbar-btn shadow-none" *ngFor="let item of items | async" ngbDropdownItem (click)="collapsed = !collapsed" (click)="changeCompetition(item)" (click)="changeColor(item)">
             {{ item.name}}
           </button>
        
+=======
+          <li class="navbarBg" *ngFor="let item of items | async" ngbDropdownItem (click)="changeCompetition(item)">
+            {{ item.name}}
+          </li>
+>>>>>>> 124a7fd44136f908860c8a936a9ebb1f24afbf99
       </ul>
     </div>
   </nav>
