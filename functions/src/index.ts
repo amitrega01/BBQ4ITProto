@@ -63,15 +63,16 @@ app.put('/score/:route/:id', (req, res) => {
       });
   } else {
     const nickToCheck = req.body.new.nick === req.body.old.nick ? req.body.old.nick : req.body.new.nick;
+    const sizeToCheck = req.body.new.nick === req.body.old.nick ? 1 : 0;
     db.collection(req.params.route)
       .where('nick', '==', nickToCheck)
       .get()
       .then((snapshot: any) => {
         console.log(snapshot);
-        if (snapshot.empty) {
+        if (snapshot.size == sizeToCheck) {
           db.collection(req.params.route)
             .doc(req.params.id)
-            .update(req.body)
+            .update(req.body.new)
             .then((ref: any) => {
               res.send({ type: 'OK', msg: 'Zaaktualizowano wpis' });
             })
