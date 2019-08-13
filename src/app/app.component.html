@@ -1,16 +1,5 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<!-- <div class="navbar">
-  <img src="../assets/logo.png" alt="bbq" height="50" width="50" />
-
-  
-
-  <button class="logoutButton" *ngIf="afAuth.user | async as user" (click)="onClickLogout()">
-    <i class="fa fa-sign-out" style="font-size:20px;color:white"></i>
-    Logout
-  </button>
-</div> -->
 <div *ngIf="afAuth.user | async as user" class="navbarBg">
-  <nav class="navbar navbar-expand-md navbar-dark bg-dark navbar2">
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <img src="../assets/logo.png" alt="bbq" height="50" width="50" />
     <button
       class="navbar-toggler navbarBg"
@@ -23,11 +12,18 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="navbar-collapse black" [class.collapse]="collapsed" id="navbarContent">
+    <div class="navbar-collapse collapse black" [class.collapse]="collapsed" id="navbarContent navbarNavAltMarkup">
       <ul class="navbar-nav ml-auto">
-        <li class="navbarBg" *ngFor="let item of items | async" ngbDropdownItem (click)="changeCompetition(item)">
+        <button
+          [class.selected]="item === currentCompetition"
+          class="navbarBg btn btn-primary navbar-btn shadow-none"
+          *ngFor="let item of items | async"
+          ngbDropdownItem
+          (click)="collapsed = !collapsed"
+          (click)="changeCompetition(item)"
+        >
           {{ item.name }}
-        </li>
+        </button>
       </ul>
     </div>
   </nav>
@@ -41,7 +37,21 @@
 <app-footer></app-footer>
 <ng-template #showLogin>
   <div class="loginPanel">
-    <img src="../assets/logo.png" alt="BBQ4.IT" height="1000" width="1000" />
+    <img class="img-fluid" style="width: 20%;" src="../assets/logo.png" alt="BBQ4.IT" />
+
+    <br />
+    <br />
+    <form class="loginForm" #userlogin="ngForm" (ngSubmit)="onClickSubmit(userlogin.value)">
+      <img src="../assets/rekord.png" class="reklog" alt="logo_rekord" />
+
+      <br />
+      <input class="loginInput" type="text" name="email" placeholder="Email" ngModel />
+
+      <input class="loginInput" type="password" name="password" placeholder="Password" ngModel />
+
+      <input class="loginInput" type="submit" value="Zaloguj" />
+    </form>
+    >>>>>>> cholewka
     <br />
     <div *ngIf="alertVisible">
       <div #alert class="alert alert-danger alert-dismissible fade show" role="alert">
