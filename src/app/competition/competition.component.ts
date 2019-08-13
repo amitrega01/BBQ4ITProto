@@ -57,7 +57,7 @@ export class CompetitionComponent {
   }
 
   async deleteScore() {
-    let res = confirm('Jesteś pewien że chcesz usunąc ten wynik?');
+    const res = confirm('Jesteś pewien że chcesz usunąc ten wynik?');
     if (res) {
       await this.apiRequest(null, 'PUT', this.currentItem.id);
     }
@@ -86,7 +86,7 @@ export class CompetitionComponent {
       return;
     } else {
       this.alertVisible ? (this.alertVisible = false) : (this.alertVisible = false);
-      var toAdd: Score = {
+      const toAdd: Score = {
         score: this.addScore.value.score,
         nick: this.addScore.value.nick,
         added: moment(new Date()).format('hh:mm DD-MM-YYYY'),
