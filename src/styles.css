@@ -212,3 +212,22 @@ table {
   max-width: 200px;
   object-fit: cover;
 }
+.btn:focus, .btn:active {
+  background-color:white !important;
+  border-color: orangered !important;
+  outline: 0 !important;
+  color: #111111 !important;
+}
+
+.dropdown-item:visited {
+  background-color: white !important;
+}
+
+button.selected{
+  background-color: white;
+  color: #111111;
+}
+
+nav[aria-selected="true"] {
+  background: #ffffff !important;
+}

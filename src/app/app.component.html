@@ -1,28 +1,20 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<!-- <div class="navbar">
-  <img src="../assets/logo.png" alt="bbq" height="50" width="50" />
 
-  
-
-  <button class="logoutButton" *ngIf="afAuth.user | async as user" (click)="onClickLogout()">
-    <i class="fa fa-sign-out" style="font-size:20px;color:white"></i>
-    Logout
-  </button>
-</div> -->
 <div *ngIf="afAuth.user | async as user" class="navbarBg">
-  <nav class="navbar navbar-expand-md navbar-dark bg-dark navbar2">
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <img src="../assets/logo.png" alt="bbq" height="50" width="50" />
     <button class="navbar-toggler navbarBg" type="button" aria-controls="navbarContent" [attr.aria-expanded]="!collapsed" aria-label="Toggle navigation" (click)="collapsed = !collapsed">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     
-    <div class="navbar-collapse black" [class.collapse]="collapsed" id="navbarContent">
+    <div class="navbar-collapse collapse black" [class.collapse]="collapsed" id="navbarContent navbarNavAltMarkup">
       <ul class="navbar-nav ml-auto">
         
-          <li class="navbarBg" *ngFor="let item of items | async" ngbDropdownItem (click)="changeCompetition(item)">
+  
+          <button [class.selected]="item === currentCompetition" class="navbarBg btn btn-primary navbar-btn shadow-none" *ngFor="let item of items | async" ngbDropdownItem (click)="collapsed = !collapsed" (click)="changeCompetition(item)" (click)="changeColor(item)">
             {{ item.name}}
-          </li>
+          </button>
+       
       </ul>
     </div>
   </nav>
