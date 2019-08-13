@@ -23,7 +23,7 @@ export class AppComponent {
     this.items = this.itemsDoc.valueChanges();
    
   }
-  
+ 
   @Output() changeComponent = new EventEmitter<any>();
   onClickSubmit(data) {
     this.afAuth.auth
@@ -69,5 +69,6 @@ export class AppComponent {
     }
 
   }
+  
 
 }
