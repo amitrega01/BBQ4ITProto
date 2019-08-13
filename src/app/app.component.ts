@@ -14,6 +14,7 @@ export class AppComponent {
   password: string;
   alertVisible = false;
   alertContent: string;
+  collapsed: boolean;
   private itemsDoc: AngularFirestoreCollection<Competition>;
   items: Observable<Competition[]>;
   currentCompetition: any;
@@ -21,7 +22,6 @@ export class AppComponent {
     afs.collection('competitions').get();
     this.itemsDoc = afs.collection('competitions');
     this.items = this.itemsDoc.valueChanges();
-   
   }
  
   @Output() changeComponent = new EventEmitter<any>();

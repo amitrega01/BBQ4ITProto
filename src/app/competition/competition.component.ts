@@ -2,12 +2,11 @@ import { Component, OnInit, Input, Directive } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Competition } from '../interfaces/Competition';
 import { Score } from '../interfaces/Score';
-import { Observable } from 'rxjs';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as moment from 'moment';
-import { ClassGetter } from '@angular/compiler/src/output/output_ast';
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-competition',
   templateUrl: './competition.component.html',
@@ -16,6 +15,7 @@ import { ClassGetter } from '@angular/compiler/src/output/output_ast';
 export class CompetitionComponent {
   alertVisible = false;
   alertContent = '';
+  alertType = 'warning';
   _comp: Competition;
   afs: AngularFirestore;
   results: any;
@@ -28,7 +28,8 @@ export class CompetitionComponent {
     nick: new FormControl(''),
     score: new FormControl(''),
     added: new FormControl(''),
-    postedBy: new FormControl('')
+    postedBy: new FormControl(''),
+    id: new FormControl('')
   });
 
   closeResult: string;
@@ -46,60 +47,35 @@ export class CompetitionComponent {
   get comp() {
     return this._comp;
   }
-  constructor(afs: AngularFirestore, private modalService: NgbModal, public afAuth: AngularFireAuth) {
+  constructor(
+    afs: AngularFirestore,
+    private modalService: NgbModal,
+    public afAuth: AngularFireAuth,
+    private http: HttpClient
+  ) {
     this.afs = afs;
   }
 
-  deleteScore() {
-    let collection = this.afs.collection(this._comp.route);
-    collection.ref
-      .where('nick', '==', this.currentItem.nick)
-      .where('score', '==', this.currentItem.score)
-      .get()
-      .then(querySnapshot => {
-        querySnapshot.forEach(doc => {
-          console.log(doc.id, ' => ', doc.data());
-          let res = confirm('Jesteś pewien że chcesz usunąc ten wynik?');
-          if (res) {
-            collection.doc(doc.id).delete();
-          }
-        });
-      })
-      .catch(error => {
-        console.log('Error getting documents: ', error);
-      })
-      .finally(() => {
-        this.updateScoreForm.reset();
-        this.modalService.dismissAll('Cross click');
-      });
+  async deleteScore() {
+    let res = confirm('Jesteś pewien że chcesz usunąc ten wynik?');
+    if (res) {
+      await this.apiRequest(null, 'PUT', this.currentItem.id);
+    }
   }
 
-  updateScore() {
-    let collection = this.afs.collection(this._comp.route);
-    collection.ref
-      .where('nick', '==', this.currentItem.nick)
-      .where('score', '==', this.currentItem.score)
-      .get()
-      .then(querySnapshot => {
-        querySnapshot.forEach(doc => {
-          console.log(doc.id, ' => ', doc.data());
-          console.log(this.updateScoreForm.value);
-          collection.doc(doc.id).set(this.updateScoreForm.value);
-        });
-      })
-      .catch(error => {
-        console.log('Error getting documents: ', error);
-      })
-      .finally(() => {
+  async updateScore() {
+    await this.apiRequest({ old: this.currentItem, new: this.updateScoreForm.value }, 'PUT', this.currentItem.id).then(
+      () => {
         this.updateScoreForm.reset();
         this.modalService.dismissAll('Cross click');
-      });
+      }
+    );
   }
 
   onSort(event) {
     console.log(event);
   }
-  onClickSubmit() {
+  async onClickSubmit() {
     if (this.addScore.value.nick == '' || this.addScore.value.nick == null) {
       this.alertVisible = true;
       this.alertContent = 'Uzupełnij pole Nick';
@@ -117,26 +93,7 @@ export class CompetitionComponent {
         postedBy: this.afAuth.auth.currentUser.email
       };
       console.log(toAdd);
-      fetch(`https://us-central1-bbq4it-b4163.cloudfunctions.net/api/score/${this._comp.route}`, {
-        method: 'POST', // *GET, POST, PUT, DELETE, etc.
-        mode: 'no-cors', // no-cors, cors, *same-origin
-        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-        credentials: 'same-origin', // include, *same-origin, omit
-        headers: {
-          'Content-Type': 'application/json'
-          // 'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        redirect: 'follow', // manual, *follow, error
-        referrer: 'no-referrer', // no-referrer, *client
-        body: JSON.stringify(toAdd) // body data type must match "Content-Type" header
-      })
-        .then((msg: any) => {
-          console.log(msg);
-          this.addScore.reset();
-        })
-        .catch((err: any) => {
-          console.log(err);
-        });
+      await this.apiRequest(toAdd, 'POST', null);
     }
   }
 
@@ -162,4 +119,37 @@ export class CompetitionComponent {
       return `with: ${reason}`;
     }
   }
+
+  apiRequest = async (body, type, id) => {
+    let uri = `https://us-central1-bbq4it-b4163.cloudfunctions.net/api/score/${this._comp.route}`;
+    if (id != null) {
+      uri += `/${id}`;
+    }
+    await fetch(uri, {
+      method: type, // *GET, POST, PUT, DELETE, etc.
+      mode: 'cors', // no-cors, cors, *same-origin
+      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+      credentials: 'same-origin', // include, *same-origin, omit
+      headers: {
+        'Content-Type': 'application/json',
+        'X-HTTP-Method-Override': type
+        // 'Content-Type': 'applicastion/x-www-form-urlencoded',
+      },
+      redirect: 'follow', // manual, *follow, error
+      referrer: 'no-referrer', // no-referrer, *client
+      body: JSON.stringify(body) // body data type must match "Content-Type" header
+    })
+      .then((response: any) => {
+        return response.json();
+      })
+      .then((json: any) => {
+        this.alertType = json.type === 'OK' ? 'success' : 'warning';
+        this.alertVisible = true;
+        this.alertContent = json.msg;
+        this.addScore.reset();
+      })
+      .catch((err: any) => {
+        console.log(err);
+      });
+  };
 }
