@@ -59,17 +59,22 @@ export class CompetitionComponent {
   async deleteScore() {
     const res = confirm('Jesteś pewien że chcesz usunąc ten wynik?');
     if (res) {
-      await this.apiRequest(null, 'PUT', this.currentItem.id);
+      await this.apiRequest({ delete: true }, 'PUT', this.currentItem.id).then((response: any) => {
+        this.updateScoreForm.reset();
+        this.modalService.dismissAll('Cross click');
+      });
     }
   }
 
   async updateScore() {
-    await this.apiRequest({ old: this.currentItem, new: this.updateScoreForm.value }, 'PUT', this.currentItem.id).then(
-      () => {
-        this.updateScoreForm.reset();
-        this.modalService.dismissAll('Cross click');
-      }
-    );
+    await this.apiRequest(
+      { old: this.currentItem, new: this.updateScoreForm.value, delete: false },
+      'PUT',
+      this.currentItem.id
+    ).then(() => {
+      this.updateScoreForm.reset();
+      this.modalService.dismissAll('Cross click');
+    });
   }
 
   onSort(event) {

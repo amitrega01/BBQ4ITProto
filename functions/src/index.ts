@@ -50,18 +50,21 @@ app.post('/score/:route', (req, res) => {
 });
 //TODO: naprawic delete
 app.put('/score/:route/:id', (req, res) => {
-  console.log(req.body);
-  if (req.body == null) {
+  if (req.body.delete == true) {
     db.collection(req.params.route)
       .doc(req.params.id)
       .delete()
       .then((ref: any) => {
+        console.log('Deleted');
         res.send({ type: 'OK', msg: 'Usunięto wpis' });
       })
       .catch((error: any) => {
+        console.log('ERROR');
+
         res.send({ type: 'ERROR', msg: 'Błąd ' + error.msg });
       });
   } else {
+    console.log(req.body);
     const nickToCheck = req.body.new.nick === req.body.old.nick ? req.body.old.nick : req.body.new.nick;
     const sizeToCheck = req.body.new.nick === req.body.old.nick ? 1 : 0;
     db.collection(req.params.route)
