@@ -1,0 +1,38 @@
+<p>Tournament</p>
+
+<form id="addUser" [formGroup]="addUser" (ngSubmit)="onClickSubmit()">
+  <input class="scoreInput" type="text" formControlName="nick" placeholder="Nick" />
+
+  <input class="scoreInput" type="submit" value="Dodaj do zawodów" />
+</form>
+
+<ul>
+  <li *ngFor="let item of users">{{ item.nick }}</li>
+</ul>
+<i class="fas fa-medal"></i><i class="fas fa-medal"></i>
+<button
+  type="button"
+  class="btn btn-success"
+  *ngIf="tournamentReady"
+  title="Uruchom turniej"
+  (click)="launchTournament()"
+>
+  Uruchom turniej
+</button>
+<p>LOL</p>
+<div
+  style="display: flex;
+flex-direction: row;justify-content: center"
+  *ngFor="let round of tree.rounds"
+>
+  <div *ngFor="let bracket of round">
+    <div style="display: flex; flex-direction: row; padding: 16px;">
+      <button class="ladderBtnL" (click)="bracket.setResult(0)">
+        {{ bracket.result[0] ? bracket.result[0].nick : 'Empty' }}
+      </button>
+      <button class="ladderBtnR" (click)="bracket.setResult(1)">
+        {{ bracket.result[1] ? bracket.result[1].nick : 'Empty' }}
+      </button>
+    </div>
+  </div>
+</div>

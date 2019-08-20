@@ -1,22 +1,6 @@
-<br/>
+<br />
 <div class="col">
-  <!-- <div ngbDropdown class="d-inline-block bt">
-    <button class="btn btn-outline-primary buttonss bt" id="dropdownBasic1" ngbDropdownToggle>
-      {{ selectedcompetition }}
-    </button>
-    <div class="bt tabelBg" ngbDropdownMenu aria-labelledby="dropdownBasic1">
-      <button class="tabelBg" *ngFor="let item of items | async" ngbDropdownItem (click)="changeCompetition(item)">
-        {{ item.name | json }}
-      </button>     
-    </div>
+  <div *ngIf="currentCompetition != undefined">
+    <app-competition [comp]="currentCompetition"></app-competition>
   </div>
-</div>
-
-<br/> -->
-
-
-
-
-<div *ngIf="currentCompetition != undefined">
-  <app-competition [comp]="currentCompetition"></app-competition>
 </div>
