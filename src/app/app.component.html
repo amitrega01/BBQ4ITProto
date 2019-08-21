@@ -1,6 +1,7 @@
 <div *ngIf="afAuth.user | async as user" class="navbarBg">
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <img src="../assets/logo.png" alt="bbq" height="50" width="50" />
+
     <button
       class="navbar-toggler navbarBg"
       type="button"
@@ -23,6 +24,9 @@
           (click)="changeCompetition(item)"
         >
           {{ item.name }}
+        </button>
+        <button class="navbarBg  navbar-btn shadow-none addCompBtn" (click)="open(content)">
+          <i class="fa fa-plus"></i>
         </button>
       </ul>
     </div>
@@ -63,5 +67,43 @@
     <br />
 
     <br />
+  </div>
+</ng-template>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Dodawanie konkurencji</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label for="name">Nazwa konkurencji</label>
+        <input id="name" class="form-control" placeholder="Nazwa" type="text" />
+        <br />
+        <label for="route">Scieżka w bazie</label>
+        <input
+          id="route"
+          class="form-control"
+          placeholder="Scieżka np. nazwa bez specjalnych znaków i spacji"
+          type="text"
+        />
+        <br />
+        <label for="type">Typ konkurencji</label>
+        <div class="input-group">
+          <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="model">
+            <label ngbButtonLabel class="btn-primary"> <input ngbButton type="radio" [value]="1" /> Normalny </label>
+            <label ngbButtonLabel class="btn-primary">
+              <input ngbButton type="radio" value="middle" /> Turniejowy
+            </label>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
   </div>
 </ng-template>

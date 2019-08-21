@@ -5,11 +5,14 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Competition } from './interfaces/Competition';
 import { Observable } from 'rxjs';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html'
 })
 export class AppComponent {
+  closeResult: string;
+
   email: string;
   password: string;
   alertVisible = false;
@@ -18,12 +21,12 @@ export class AppComponent {
   private itemsDoc: AngularFirestoreCollection<Competition>;
   items: Observable<Competition[]>;
   currentCompetition: any;
-  constructor(public afAuth: AngularFireAuth, afs: AngularFirestore) {
+  constructor(public afAuth: AngularFireAuth, afs: AngularFirestore, private modalService: NgbModal) {
     afs.collection('competitions').get();
     this.itemsDoc = afs.collection('competitions');
     this.items = this.itemsDoc.valueChanges();
   }
- 
+
   @Output() changeComponent = new EventEmitter<any>();
   onClickSubmit(data) {
     this.afAuth.auth
@@ -48,27 +51,42 @@ export class AppComponent {
     this.alertVisible = false;
   }
   public ngOnInit() {
-    $('btn').on('click', function(){
+    $('btn').on('click', function() {
       $('btn').removeClass('selected');
       $(this).addClass('selected');
-  });
+    });
   }
 
-  onButtonGroupClick($event){
+  onButtonGroupClick($event) {
     let clickedElement = $event.target || $event.srcElement;
 
-    if( clickedElement.nodeName === "BUTTON" ) {
-
-      let isCertainButtonAlreadyActive = clickedElement.parentElement.querySelector(".active");
+    if (clickedElement.nodeName === 'BUTTON') {
+      let isCertainButtonAlreadyActive = clickedElement.parentElement.querySelector('.active');
       // if a Button already has Class: .active
-      if( isCertainButtonAlreadyActive ) {
-        isCertainButtonAlreadyActive.classList.remove("active");
+      if (isCertainButtonAlreadyActive) {
+        isCertainButtonAlreadyActive.classList.remove('active');
       }
 
-      clickedElement.className += " active";
+      clickedElement.className += ' active';
     }
-
   }
-  
-
+  open(content) {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
+      result => {
+        this.closeResult = `Closed with: ${result}`;
+      },
+      reason => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      }
+    );
+  }
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
 }
