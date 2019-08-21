@@ -21,6 +21,18 @@ app.use(function(req, res, next) {
 });
 //https://us-central1-bbq4it-b4163.cloudfunctions.net/api/newScore/:route
 
+app.post('/competitions', (req, res) => {
+  db.collection('competitions')
+    .add(req.body)
+    .then((ref: any) => {
+      res.send({ type: 'OK', msg: 'Dodano konkurencję' });
+    })
+    .catch((err: any) => {
+      console.log(err);
+      res.send({ type: 'ERROR', msg: err.msg });
+    });
+});
+
 app.post('/score/:route', (req, res) => {
   db.collection(req.params.route)
     .where('nick', '==', req.body.nick)

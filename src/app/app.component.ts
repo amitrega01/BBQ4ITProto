@@ -65,9 +65,35 @@ export class AppComponent {
     });
   }
 
-  addNewComp() {
+  async addNewComp() {
     console.log('CLOSE');
-    console.log(this.newCompForm.value);
+    console.log(JSON.stringify(this.newCompForm.value));
+    if (this.newCompForm.value.name != '' && this.newCompForm.value.route != '') {
+      await fetch('https://us-central1-bbq4it-b4163.cloudfunctions.net/api/competitions', {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        mode: 'cors', // no-cors, cors, *same-origin
+        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: 'same-origin', // include, *same-origin, omit
+        headers: {
+          'Content-Type': 'application/json',
+          'X-HTTP-Method-Override': 'POST'
+          // 'Content-Type': 'applicastion/x-www-form-urlencoded',
+        },
+        redirect: 'follow', // manual, *follow, error
+        referrer: 'no-referrer', // no-referrer, *client
+        body: JSON.stringify(this.newCompForm.value) // body data type must match "Content-Type" header
+      })
+        .then((response: any) => {
+          return response.json();
+        })
+        .then((json: any) => {
+          this.newCompForm.reset();
+          this.modalService.dismissAll();
+        })
+        .catch((err: any) => {
+          console.log(err);
+        });
+    }
   }
 
   onButtonGroupClick($event) {
