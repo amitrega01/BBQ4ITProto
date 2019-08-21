@@ -78,13 +78,14 @@
     </button>
   </div>
   <div class="modal-body">
-    <form>
+    <form [formGroup]="newCompForm" (ngSubmit)="addNewComp()">
       <div class="form-group">
         <label for="name">Nazwa konkurencji</label>
-        <input id="name" class="form-control" placeholder="Nazwa" type="text" />
+        <input id="name" formControlName="name" class="form-control" placeholder="Nazwa" type="text" />
         <br />
         <label for="route">Scieżka w bazie</label>
         <input
+          formControlName="route"
           id="route"
           class="form-control"
           placeholder="Scieżka np. nazwa bez specjalnych znaków i spacji"
@@ -92,18 +93,14 @@
         />
         <br />
         <label for="type">Typ konkurencji</label>
-        <div class="input-group">
-          <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="model">
-            <label ngbButtonLabel class="btn-primary"> <input ngbButton type="radio" [value]="1" /> Normalny </label>
-            <label ngbButtonLabel class="btn-primary">
-              <input ngbButton type="radio" value="middle" /> Turniejowy
-            </label>
-          </div>
+        <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" formControlName="type">
+          <label ngbButtonLabel class="btn-primary"> <input ngbButton type="radio" value="normal" /> Zwykły </label>
+          <label ngbButtonLabel class="btn-primary"> <input ngbButton type="radio" value="ladder" /> Turniejowy </label>
         </div>
       </div>
     </form>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+    <button type="button" class="btn btn-outline-dark" (click)="addNewComp()">Dodaj</button>
   </div>
 </ng-template>

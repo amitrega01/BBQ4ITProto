@@ -1,6 +1,7 @@
 import { Component, ViewChild, ElementRef, EventEmitter, Output } from '@angular/core';
 declare var $: any;
 
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Competition } from './interfaces/Competition';
@@ -12,7 +13,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 })
 export class AppComponent {
   closeResult: string;
-
+  tournamentType: string = 'normal';
   email: string;
   password: string;
   alertVisible = false;
@@ -21,6 +22,13 @@ export class AppComponent {
   private itemsDoc: AngularFirestoreCollection<Competition>;
   items: Observable<Competition[]>;
   currentCompetition: any;
+
+  newCompForm: FormGroup = new FormGroup({
+    name: new FormControl(''),
+    route: new FormControl(''),
+    type: new FormControl('')
+  });
+
   constructor(public afAuth: AngularFireAuth, afs: AngularFirestore, private modalService: NgbModal) {
     afs.collection('competitions').get();
     this.itemsDoc = afs.collection('competitions');
@@ -55,6 +63,11 @@ export class AppComponent {
       $('btn').removeClass('selected');
       $(this).addClass('selected');
     });
+  }
+
+  addNewComp() {
+    console.log('CLOSE');
+    console.log(this.newCompForm.value);
   }
 
   onButtonGroupClick($event) {
