@@ -41,6 +41,9 @@
     <br />
     <br />
   </div>
+  <div style="position: fixed;width: 100%;   bottom: 64px; margin: 0 auto; text-align: center">
+    <button type="button" class="btn btn-outline-danger" (click)="deleteCompetition()">Usuń konkurencję</button>
+  </div>
 </div>
 <ng-template #content let-modal>
   <div class="modal-header">
@@ -75,5 +78,4 @@
       <button class="deleteScoreBtn" (click)="deleteScore()">Usuń wpis</button>
     </div>
   </div>
-  
 </ng-template>

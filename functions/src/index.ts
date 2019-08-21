@@ -33,6 +33,25 @@ app.post('/competitions', (req, res) => {
     });
 });
 
+app.delete('/competitions', (req, res) => {
+  db.collection('competitions')
+    .where('route', '==', req.body.route)
+    .get()
+    .then((snapshot: any) => {
+      snapshot.forEach((element: any) => {
+        db.collection('competitions')
+          .doc(element.id)
+          .delete()
+          .then((response: any) => {
+            res.send({ type: 'OK', msg: 'Usunięto konurencję' + JSON.stringify(response) });
+          });
+      });
+    })
+    .catch((err: any) => {
+      console.log(err);
+      res.send({ type: 'ERROR', msg: err.msg });
+    });
+});
 app.post('/score/:route', (req, res) => {
   db.collection(req.params.route)
     .where('nick', '==', req.body.nick)

@@ -55,7 +55,39 @@ export class CompetitionComponent {
   ) {
     this.afs = afs;
   }
-
+  async deleteCompetition() {
+    console.log(this._comp);
+    if (confirm('Usunąc ' + this._comp.name + '?')) {
+      await fetch(`https://us-central1-bbq4it-b4163.cloudfunctions.net/api/competitions`, {
+        method: 'DELETE', // *GET, POST, PUT, DELETE, etc.
+        mode: 'cors', // no-cors, cors, *same-origin
+        cache: 'no-cache', // *def ault, no-cache, reload, force-cache, only-if-cached
+        credentials: 'same-origin', // include, *same-origin, omit
+        headers: {
+          'Content-Type': 'application/json',
+          'X-HTTP-Method-Override': 'DELETE'
+          // 'Content-Type': 'applicastion/x-www-form-urlencoded',
+        },
+        redirect: 'follow', // manual, *follow, error
+        referrer: 'no-referrer', // no-referrer, *client
+        body: JSON.stringify(this._comp) // body data type must match "Content-Type" header
+      })
+        .then((response: any) => {
+          console.log(response);
+          return response.json();
+        })
+        .then((json: any) => {
+          console.log(json);
+          this.alertType = json.type === 'OK' ? 'success' : 'warning';
+          this.alertVisible = true;
+          this.alertContent = json.msg;
+          this.addScore.reset();
+        })
+        .catch((err: any) => {
+          console.log(err);
+        });
+    }
+  }
   async deleteScore() {
     const res = confirm('Jesteś pewien że chcesz usunąc ten wynik?');
     if (res) {
