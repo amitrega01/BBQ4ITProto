@@ -11,6 +11,10 @@ body {
   background-color: transparent;
   font-family: 'Open Sans', sans-serif !important;
 }
+.logoLink:hover .logoLink:active .logoLink:focus {
+  background: none !important;
+}
+
 .logoutButton {
   background-color: Transparent;
   background-repeat: no-repeat;
@@ -238,4 +242,16 @@ nav[aria-selected='true'] {
   min-height: 32px;
   background: rgba(255, 255, 255, 0.25);
   border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.logoLink:hover {
+  background: none !important;
+}
+
+.logoLink:focus {
+  background: none !important;
+}
+
+.logoLink:active {
+  background: none !important;
 }

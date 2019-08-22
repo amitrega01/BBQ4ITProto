@@ -1,6 +1,8 @@
 <div *ngIf="afAuth.user | async as user" class="navbarBg">
   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-    <img src="../assets/logo.svg" alt="bbq" />
+    <a [routerLink]="['/']" routerLinkActive="router-link-active" class="logoLink">
+      <img src="../assets/logo.svg" alt="bbq"
+    /></a>
 
     <button
       class="navbar-toggler navbarBg"

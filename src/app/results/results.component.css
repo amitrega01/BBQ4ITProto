@@ -162,3 +162,37 @@ img {
   height: auto;
   margin-bottom: 25px;
 }
+.lessmore {
+  width: 80% !important;
+  background-color: transparent;
+  border-color: white;
+  border-width: 1px;
+  color: white;
+  font-weight: bolder;
+}
+table tr:nth-child(1) td:nth-child(1) {
+  color: goldenrod !important;
+  font-size: 30px;
+  text-shadow: -0.5px 0 rgba(1, 1, 1, 0.5), 0 0.5px rgba(1, 1, 1, 0.5), 0.5px 0 rgba(1, 1, 1, 0.5),
+    0 -0.5px rgba(1, 1, 1, 0.5);
+}
+table tr:nth-child(2) td:nth-child(1) {
+  color: silver !important;
+  font-size: 28px;
+  text-shadow: -0.5px 0 rgba(1, 1, 1, 0.5), 0 0.5px rgba(1, 1, 1, 0.5), 0.5px 0 rgba(1, 1, 1, 0.5),
+    0 -0.5px rgba(1, 1, 1, 0.5);
+}
+table tr:nth-child(3) td:nth-child(1) {
+  color: rgb(92, 55, 0) !important;
+
+  font-size: 25px;
+  text-shadow: -0.5px 0 rgba(255, 255, 255, 0.5), 0 0.5px rgba(255, 255, 255, 0.5), 0.5px 0 rgba(255, 255, 255, 0.5),
+    0 -0.5px rgba(255, 255, 255, 0.5);
+}
+tr {
+  color: white;
+  font-weight: bold;
+}
+td {
+  vertical-align: middle !important;
+}
