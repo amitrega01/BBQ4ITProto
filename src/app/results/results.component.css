@@ -1,0 +1,27 @@
+.lessmore {
+    width: 80% !important;
+    background-color: transparent;
+    border-color: white;
+    border-width: 1px;
+    color: white;
+    font-weight: bolder;
+  }
+  table tr:nth-child(1) td:nth-child(1) {
+    color: goldenrod !important;
+    font-size: 30px;
+  }
+  table tr:nth-child(2) td:nth-child(1) {
+    color: silver !important;
+    font-size: 20px;
+  }
+  table tr:nth-child(3) td:nth-child(1) {
+    color: rgb(146, 78, 10) !important;
+    font-size: 20px;
+  }
+  tr {
+    color: white;
+    font-weight: bold;
+  }
+  td {
+    vertical-align: middle !important;
+  }
