@@ -1,19 +1,23 @@
 <div class="wrap">
-  <div class="header">
-    <img src="../assets/new.png" alt="test" />
-  </div>
+  <div class="inner">
+    <div class="header">
+      <img src="../assets/new.png" alt="test" />
+    </div>
 
-  <div class="center">
-    <app-player-result></app-player-result>
-  </div>
-  <br />
-  <div class="container">
-    <div class="row">
-      <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12  srodek" *ngFor="let item of items | async">
-        <h4 class="white">{{ item.name }}</h4>
-        <app-results [comp]="item"></app-results>
-        <br />
-        <br />
+    <div class="center">
+      <app-player-result></app-player-result>
+    </div>
+    <br />
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12  srodek" *ngFor="let item of items | async">
+          <h4 class="white">
+            <b>{{ item.name }}</b>
+          </h4>
+          <app-results [comp]="item"></app-results>
+          <br />
+          <br />
+        </div>
       </div>
     </div>
   </div>

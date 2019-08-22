@@ -9,6 +9,7 @@
 }
 body {
   background-color: transparent;
+  font-family: 'Open Sans', sans-serif !important;
 }
 .logoutButton {
   background-color: Transparent;

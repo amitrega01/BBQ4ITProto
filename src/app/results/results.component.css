@@ -1,0 +1,164 @@
+/* You can add global styles to this file, and also import other style files */
+/* button {
+    width: 150px;
+} */
+.wrap {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  font-family: 'Open Sans', sans-serif;
+  background: purple;
+}
+.inner {
+  display: flex;
+  flex: 1;
+  background: linear-gradient(to top right, rgba(98, 98, 206, 0.6), rgba(0, 0, 200, 0));
+  min-height: 100vh !important;
+}
+
+.srodek {
+  text-align: center !important;
+}
+table {
+  font-family: 'Open Sans', sans-serif !important;
+  width: 100%;
+  counter-reset: row-num;
+  counter-increment: row-num -1;
+}
+table tr {
+  counter-increment: row-num;
+}
+table tr:nth-child(n + 4) td:first-child::before {
+  content: counter(row-num) '. ';
+}
+table thead th {
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.5);
+}
+tbody tr:nth-child(n + 4) td:nth-child(1) p {
+  display: none;
+}
+
+.lessmore {
+  width: 80% !important;
+  background-color: transparent;
+  border-color: white;
+  border-width: 1px;
+  color: white;
+  font-weight: bolder;
+}
+button:focus {
+  background-color: white !important;
+  color: black;
+}
+
+.center {
+  text-align: center;
+}
+
+/* .firstRow {
+      background: white !important;
+    } */
+.white {
+  color: white !important;
+}
+table tr:nth-child(1) td:nth-child(1) {
+  color: goldenrod !important;
+  font-size: 30px;
+}
+table tr:nth-child(2) td:nth-child(1) {
+  color: silver !important;
+  font-size: 20px;
+}
+table tr:nth-child(3) td:nth-child(1) {
+  color: rgb(146, 78, 10) !important;
+  font-size: 20px;
+}
+tr {
+  color: white;
+}
+td {
+  vertical-align: middle !important;
+}
+
+.header {
+  overflow: hidden;
+  background-color: transparent;
+  padding: 20px 10px;
+}
+
+.header a {
+  float: left;
+  color: white;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  line-height: 25px;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.header a.logo {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.header a:hover {
+  background: rgb(255, 255, 255);
+  background: -moz-linear-gradient(
+    top,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(246, 246, 246, 1) 47%,
+    rgba(237, 237, 237, 1) 100%
+  );
+  background: -webkit-linear-gradient(
+    top,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(246, 246, 246, 1) 47%,
+    rgba(237, 237, 237, 1) 100%
+  );
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(246, 246, 246, 1) 47%,
+    rgba(237, 237, 237, 1) 100%
+  );
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed', GradientType=0);
+  color: black;
+  font-weight: bold;
+}
+
+.header a:focus {
+  background: rgb(255, 255, 255);
+  background: -moz-linear-gradient(
+    top,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(246, 246, 246, 1) 47%,
+    rgba(237, 237, 237, 1) 100%
+  );
+  background: -webkit-linear-gradient(
+    top,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(246, 246, 246, 1) 47%,
+    rgba(237, 237, 237, 1) 100%
+  );
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(246, 246, 246, 1) 47%,
+    rgba(237, 237, 237, 1) 100%
+  );
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed', GradientType=0);
+  color: black;
+  font-weight: bold;
+}
+
+.header-right {
+  float: right;
+}
+img {
+  width: 130px;
+  height: auto;
+  margin-bottom: 25px;
+}
