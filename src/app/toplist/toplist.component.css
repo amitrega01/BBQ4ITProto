@@ -7,10 +7,13 @@
   padding: 0;
   min-height: 100vh;
   font-family: 'Open Sans', sans-serif !important;
-  background: purple;
+
+  background-image: url('../../assets/bokeh.svg');
+  background-size: auto 300%;
 }
 .inner {
-  background: linear-gradient(to top right, rgba(98, 98, 206, 0.6), rgba(0, 0, 200, 0));
+  opacity: 0.5;
+  background: linear-gradient(to top right, rgba(167, 61, 0, 0.993), rgba(143, 0, 109, 0.808));
   min-height: 100vh !important;
 }
 
