@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { RouterModule, Routes } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AngularFireModule } from '@angular/fire';
@@ -15,9 +15,36 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 
 import { FooterComponent } from './footer/footer.component';
+import { TopListComponent } from './toplist/toplist.component';
+import { ResultsComponent } from './results/results.component';
+import { PlayerResultComponent } from './player-result/player-result.component';
+import { AdminComponent } from './admin/admin.component';
+
+const appRoutes: Routes = [
+  { path: 'admin', component: AdminComponent },
+  {
+    path: '',
+    component: TopListComponent
+  },
+  { path: '', redirectTo: '', pathMatch: 'full' }
+];
+
 @NgModule({
-  declarations: [AppComponent, CompetitionsComponent, CompetitionComponent, FooterComponent],
+  declarations: [
+    AppComponent,
+    AdminComponent,
+    ResultsComponent,
+    PlayerResultComponent,
+    CompetitionsComponent,
+    CompetitionComponent,
+    FooterComponent,
+    TopListComponent
+  ],
   imports: [
+    RouterModule.forRoot(
+      appRoutes,
+      { enableTracing: true } // <-- debugging purposes only
+    ),
     NgbModule,
     BrowserModule,
     BrowserAnimationsModule,
