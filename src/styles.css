@@ -255,3 +255,6 @@ nav[aria-selected='true'] {
 .logoLink:active {
   background: none !important;
 }
+.navbarBg {
+  margin-right: 10px;
+}

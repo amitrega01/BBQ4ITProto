@@ -24,6 +24,7 @@ table {
   width: 100%;
   counter-reset: row-num;
   counter-increment: row-num -1;
+  
 }
 table tr {
   counter-increment: row-num;
