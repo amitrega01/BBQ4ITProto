@@ -10,7 +10,25 @@
       <app-player-result></app-player-result>
     </div>
     <br />
-    <div class="container">
+
+    <div class="inline" *ngIf="!mobile" (window:resize)="getScreenWidth($event)">
+      <button class="leftSwipe" (click)="prev()"><i class="fas fa-angle-double-left"></i></button>
+
+      <carousel-component  (onReachEnd)="first()" [lockSlides]="true" #topCarousel>
+        <div class="item-carousel" *ngFor="let item of items | async">
+          <h4>{{item.name}}</h4>
+          <app-results [comp]="item"></app-results>
+        </div>
+      </carousel-component>
+
+      <button  class="leftSwipe" (click)="next()"><i class="fas fa-angle-double-right"></i></button>
+    </div>
+
+   
+
+    
+
+    <div *ngIf="mobile" class="container" (window:resize)="getScreenWidth($event)">
       <div class="row">
         <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12  srodek" *ngFor="let item of items | async">
           <h4 class="white">
@@ -22,5 +40,6 @@
         </div>
       </div>
     </div>
+
   </div>
 </div>
