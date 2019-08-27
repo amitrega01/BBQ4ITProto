@@ -10,8 +10,8 @@
       <app-player-result></app-player-result>
     </div>
     <br />
-
-    <div class="inline" *ngIf="!mobile" (window:resize)="getScreenWidth($event)">
+    <div *ngIf="!mobile" (window:resize)="getScreenWidth($event)">
+    <div class="inline" >
       <button class="leftSwipe" (click)="prev()"><i class="fas fa-angle-double-left"></i></button>
 
       <carousel-component (onInit)="start()" [lockSlides]="true" #topCarousel>
@@ -24,11 +24,12 @@
       <button  class="leftSwipe" (click)="next()"><i class="fas fa-angle-double-right"></i></button>
       
     </div>
-    <!-- <button (click)="start()">START</button>
-
-    -->
-
+    <div style="margin: 0 auto;"> 
+      <button  (click)="stop()">STOP</button>
+    </div>
     
+  </div>
+
 
     <div *ngIf="mobile" class="container" (window:resize)="getScreenWidth($event)">
       <div class="row">
