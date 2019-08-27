@@ -2,6 +2,34 @@ import * as functions from 'firebase-functions';
 import * as express from 'express';
 const cors = require('cors');
 const admin = require('firebase-admin');
+export class Tree {
+  root: Bracket = new Bracket();
+  rounds: any[][] = new Array([this.root]);
+}
+
+export class Bracket {
+  result: User[] = [];
+  children: Bracket[] = [];
+  parent!: Bracket;
+  locked!: boolean;
+
+  setParent(parent: Bracket) {
+    this.parent = parent;
+    return this;
+  }
+  setResult(index: number) {
+    if (!this.locked) {
+      this.parent.result.push(this.result[index]);
+      this.locked = true;
+    } else {
+      this.parent.result.pop();
+      this.locked = false;
+    }
+  }
+}
+export interface User {
+  nick: string;
+}
 
 admin.initializeApp();
 
@@ -90,5 +118,21 @@ app.put('/score/:route/:id', (req, res) => {
         }
       });
   }
+});
+
+//LADDER REST
+app.post('/ladder/:route', (req, res) => {
+  console.log(req.params.route);
+  db.collection(req.params.route)
+    .doc('tree')
+    .set({ type: JSON.stringify(req.body) })
+    .then((response: any) => {
+      console.log(JSON.stringify(response));
+      res.send({ type: 'OK', msg: response });
+    })
+    .catch((error: any) => {
+      console.log(JSON.stringify(error));
+      res.send({ type: 'ERROR', msg: error });
+    });
 });
 exports.api = functions.https.onRequest(app);

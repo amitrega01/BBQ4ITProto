@@ -1,6 +1,6 @@
 import { Component, ViewChild, ElementRef, EventEmitter, Output } from '@angular/core';
 declare var $: any;
-
+import 'reflect-metadata';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Competition } from './interfaces/Competition';
@@ -23,7 +23,7 @@ export class AppComponent {
     this.itemsDoc = afs.collection('competitions');
     this.items = this.itemsDoc.valueChanges();
   }
- 
+
   @Output() changeComponent = new EventEmitter<any>();
   onClickSubmit(data) {
     this.afAuth.auth
@@ -48,27 +48,23 @@ export class AppComponent {
     this.alertVisible = false;
   }
   public ngOnInit() {
-    $('btn').on('click', function(){
+    $('btn').on('click', function() {
       $('btn').removeClass('selected');
       $(this).addClass('selected');
-  });
+    });
   }
 
-  onButtonGroupClick($event){
+  onButtonGroupClick($event) {
     let clickedElement = $event.target || $event.srcElement;
 
-    if( clickedElement.nodeName === "BUTTON" ) {
-
-      let isCertainButtonAlreadyActive = clickedElement.parentElement.querySelector(".active");
+    if (clickedElement.nodeName === 'BUTTON') {
+      let isCertainButtonAlreadyActive = clickedElement.parentElement.querySelector('.active');
       // if a Button already has Class: .active
-      if( isCertainButtonAlreadyActive ) {
-        isCertainButtonAlreadyActive.classList.remove("active");
+      if (isCertainButtonAlreadyActive) {
+        isCertainButtonAlreadyActive.classList.remove('active');
       }
 
-      clickedElement.className += " active";
+      clickedElement.className += ' active';
     }
-
   }
-  
-
 }
