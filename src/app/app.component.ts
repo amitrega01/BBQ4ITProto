@@ -2,6 +2,7 @@ import { Component, ViewChild, ElementRef, EventEmitter, Output } from '@angular
 declare var $: any;
 
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import 'reflect-metadata';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Competition } from './interfaces/Competition';

@@ -13,7 +13,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
-
+import { LadderComponent } from './ladder/ladder.component';
 import { FooterComponent } from './footer/footer.component';
 import { TopListComponent } from './toplist/toplist.component';
 import { ResultsComponent } from './results/results.component';
@@ -38,7 +38,8 @@ const appRoutes: Routes = [
     CompetitionsComponent,
     CompetitionComponent,
     FooterComponent,
-    TopListComponent
+    TopListComponent,
+    LadderComponent
   ],
   imports: [
     RouterModule.forRoot(

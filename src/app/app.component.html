@@ -35,7 +35,12 @@
 <br />
 <div *ngIf="afAuth.user | async as user; else showLogin">
   <div *ngIf="currentCompetition != undefined">
-    <app-competition [comp]="currentCompetition"></app-competition>
+    <div *ngIf="currentCompetition.type == 'ladder'">
+      <app-ladder [comp]="currentCompetition"></app-ladder>
+    </div>
+    <div *ngIf="currentCompetition.type == 'normal'">
+      <app-competition [comp]="currentCompetition"></app-competition>
+    </div>
   </div>
 </div>
 <app-footer></app-footer>

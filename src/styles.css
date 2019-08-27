@@ -255,3 +255,32 @@ nav[aria-selected='true'] {
 .logoLink:active {
   background: none !important;
 }
+.level0 {
+  position: relative;
+  width: 10vh;
+  display: flex;
+  flex-direction: column;
+}
+.level1 {
+  position: relative;
+  top: 0;
+  left: 100px;
+  width: 10vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.ladderBtnR {
+  padding: 16px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  background: #f2f2f2;
+  border: 1px solid #ddd;
+}
+.ladderBtnL {
+  padding: 16px;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  background: #f2f2f2;
+  border: 1px solid #ddd;
+}
