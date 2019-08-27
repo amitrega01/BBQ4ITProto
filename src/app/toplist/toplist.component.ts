@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { Score } from '../interfaces/Score';
 import { CarouselComponent } from 'ngx-carousel-lib';
 import { delay } from 'q';
+import { BPClient } from 'blocking-proxy';
+import { ThrowStmt } from '@angular/compiler';
 @Component({
   selector: 'app-toplist',
   templateUrl: './toplist.component.html',
@@ -21,6 +23,7 @@ export class TopListComponent implements OnInit {
   closeResult: string;
   currentItem: Score;
   mobile: Boolean;
+  carouselSize: number;
   changeCompetition(item) {
     console.log(item);
     this.currentCompetition = item;
@@ -31,10 +34,11 @@ export class TopListComponent implements OnInit {
       this.mobile = true;
     }
     else this.mobile= false;
-    this.topCarousel.loop = true;
-    this.topCarousel.autoPlay = true;
-    this.topCarousel.delayAutoPlay = 1000;
-    this.topCarousel.autoPlayStart()
+    // this.topCarousel.loop = true;
+    // this.topCarousel.autoPlay = true;
+    // this.topCarousel.delayAutoPlay = 1000;
+    // this.topCarousel.autoPlayStart()
+    
   }
 
 
@@ -50,23 +54,31 @@ export class TopListComponent implements OnInit {
     // this.topCarousel.autoPlay = true;
     // this.topCarousel.delayAutoPlay = 1000;
     // this.topCarousel.autoPlayStart()
-   
-    this.topCarousel.slidePrev();
-  }
-  next() {
-    this.topCarousel.slideNext();
+    this.carouselSize=this.topCarousel.carousel.totalItems;
+    console.log(this.carouselSize);
+  
+    if(this.topCarousel.carousel.activeIndex==0) {
+      this.topCarousel.slideTo(this.carouselSize-1);
+    }
+    else this.topCarousel.slidePrev();
     
   }
-  // async delay(ms: number) {
-  //   await new Promise(resolve => setTimeout(()=>resolve(), ms)).then(()=>console.log("fired"));
-  // }
-  // async first() {
-  //   console.log("check")
-  //   await delay(1000);
-  //   this.topCarousel.slideTo(0);
-  // }
-  first() {
-      
+
+  next() {
+   
+    if(this.topCarousel.carousel.activeIndex+1==this.topCarousel.carousel.totalItems) {
+        this.topCarousel.slideTo(0);
+    }
+    else  this.topCarousel.slideNext();
+}
+  start() {
+    console.log('dziala');
+    var interval = setInterval(()=>{
+      if(this.topCarousel.carousel.activeIndex+1==this.topCarousel.carousel.totalItems) {
+        this.topCarousel.slideTo(0);
+    }
+    else  this.topCarousel.slideNext();
+    },8000);
   }
 
   getScreenWidth(event) {

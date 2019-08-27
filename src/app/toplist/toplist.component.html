@@ -14,7 +14,7 @@
     <div class="inline" *ngIf="!mobile" (window:resize)="getScreenWidth($event)">
       <button class="leftSwipe" (click)="prev()"><i class="fas fa-angle-double-left"></i></button>
 
-      <carousel-component  (onReachEnd)="first()" [lockSlides]="true" #topCarousel>
+      <carousel-component (onInit)="start()" [lockSlides]="true" #topCarousel>
         <div class="item-carousel" *ngFor="let item of items | async">
           <h4>{{item.name}}</h4>
           <app-results [comp]="item"></app-results>
@@ -22,9 +22,11 @@
       </carousel-component>
 
       <button  class="leftSwipe" (click)="next()"><i class="fas fa-angle-double-right"></i></button>
+      
     </div>
+    <!-- <button (click)="start()">START</button>
 
-   
+    -->
 
     
 
