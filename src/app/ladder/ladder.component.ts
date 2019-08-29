@@ -48,6 +48,8 @@ export class Bracket {
 export class Tree {
   @Type(() => Bracket)
   root: Bracket = new Bracket();
+
+  winner: User;
   @Type(() => Bracket)
   flat: Bracket[];
   @Type(() => Bracket)
@@ -64,6 +66,7 @@ export class LadderComponent implements OnInit {
   addUser = new FormGroup({
     nick: new FormControl('')
   });
+  winner: User;
   tournamentReady: boolean;
   roundCount = 0;
   tree: Tree;
@@ -74,7 +77,7 @@ export class LadderComponent implements OnInit {
   constructor(afs: AngularFirestore) {
     this.afs = afs;
 
-    this.tournamentReady = true;
+    this.tournamentReady = false;
   }
   @Input()
   set comp(comp: Competition) {
@@ -88,6 +91,7 @@ export class LadderComponent implements OnInit {
         .then(doc => {
           if (!doc.exists) {
             console.log('No such document!');
+            this.tree = undefined;
           } else {
             console.log('Pobrano z bazy');
             console.log('PRZED');
@@ -110,6 +114,7 @@ export class LadderComponent implements OnInit {
             .then(doc => {
               if (!doc.exists) {
                 console.log('No such document!');
+                this.tree = undefined;
               } else {
                 console.log('Pobrano z bazy');
                 console.log('PRZED');
@@ -167,68 +172,41 @@ export class LadderComponent implements OnInit {
       this.tree.rounds[x - 1][i].result.push(this.users.pop(), this.users.pop());
     }
     console.dir(classToPlain(this.tree));
-    await fetch(`https://us-central1-bbq4it-b4163.cloudfunctions.net/api/ladder/${this._comp.route}`, {
-      method: 'POST', // *GET, POST, PUT, DELETE, etc.
-      mode: 'cors', // no-cors, cors, *same-origin
-      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-      credentials: 'same-origin', // include, *same-origin, omit
-      headers: {
-        'Content-Type': 'application/json',
-        'X-HTTP-Method-Override': 'POST'
-        // 'Content-Type': 'applicastion/x-www-form-urlencoded',
-      },
-      redirect: 'follow', // manual, *follow, error
-      referrer: 'no-referrer', // no-referrer, *client
-      body: JSON.stringify(classToPlain(this.tree)) // body data type must match "Content-Type" header
-    })
-      .then((response: any) => {
-        return response.json();
-      })
-      .then((json: any) => {
-        console.log('response => ' + json);
-      });
+    await this.pushToFirebase();
   }
   async setResult(bracket: Bracket, index: number) {
-    console.log(bracket.parentId);
-    console.log('SZUKAM BRACKET O ID: ' + bracket.parentId.toString());
-    this.tree.rounds.forEach(round => {
-      round.forEach((el: Bracket) => {
-        console.log(el.id);
-        if (bracket.locked) {
-          if (el.isTheSame(bracket.parentId as Guid)) {
-            console.log('FOUND ID');
-            el.result.pop();
-            bracket.locked = false;
+    if (bracket.parentId != undefined) {
+      console.log('SZUKAM BRACKET O ID: ' + bracket.parentId.toString());
+      this.tree.rounds.forEach(round => {
+        round.forEach((el: Bracket) => {
+          console.log(el.id);
+          if (bracket.locked) {
+            if (el.isTheSame(bracket.parentId as Guid)) {
+              console.log('FOUND ID');
+              el.result.pop();
+              bracket.locked = false;
+            }
+          } else {
+            if (el.isTheSame(bracket.parentId as Guid)) {
+              console.log('FOUND ID');
+              el.result.push(bracket.result[index]);
+              bracket.locked = true;
+            }
           }
-        } else {
-          if (el.isTheSame(bracket.parentId as Guid)) {
-            console.log('FOUND ID');
-            el.result.push(bracket.result[index]);
-            bracket.locked = true;
-          }
-        }
+        });
       });
-    });
-    await fetch(`https://us-central1-bbq4it-b4163.cloudfunctions.net/api/ladder/${this._comp.route}`, {
-      method: 'POST', // *GET, POST, PUT, DELETE, etc.
-      mode: 'cors', // no-cors, cors, *same-origin
-      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-      credentials: 'same-origin', // include, *same-origin, omit
-      headers: {
-        'Content-Type': 'application/json',
-        'X-HTTP-Method-Override': 'POST'
-        // 'Content-Type': 'applicastion/x-www-form-urlencoded',
-      },
-      redirect: 'follow', // manual, *follow, error
-      referrer: 'no-referrer', // no-referrer, *client
-      body: JSON.stringify(classToPlain(this.tree)) // body data type must match "Content-Type" header
-    })
-      .then((response: any) => {
-        return response.json();
-      })
-      .then((json: any) => {
-        console.log('response => ' + json);
-      });
+    } else {
+      if (bracket.locked) {
+        this.tree.winner = undefined;
+        bracket.locked = false;
+      } else {
+        console.log('WINNER');
+        console.log(bracket.result[index]);
+        this.tree.winner = bracket.result[index];
+        bracket.locked = true;
+      }
+    }
+    await this.pushToFirebase();
   }
   shuffle(array: any[]): any {
     const oldArray = [...array];
@@ -253,5 +231,27 @@ export class LadderComponent implements OnInit {
     }
 
     return newArray;
+  }
+  async pushToFirebase() {
+    await fetch(`https://us-central1-bbq4it-b4163.cloudfunctions.net/api/ladder/${this._comp.route}`, {
+      method: 'POST', // *GET, POST, PUT, DELETE, etc.
+      mode: 'cors', // no-cors, cors, *same-origin
+      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+      credentials: 'same-origin', // include, *same-origin, omit
+      headers: {
+        'Content-Type': 'application/json',
+        'X-HTTP-Method-Override': 'POST'
+        // 'Content-Type': 'applicastion/x-www-form-urlencoded',
+      },
+      redirect: 'follow', // manual, *follow, error
+      referrer: 'no-referrer', // no-referrer, *client
+      body: JSON.stringify(classToPlain(this.tree)) // body data type must match "Content-Type" header
+    })
+      .then((response: any) => {
+        return response.json();
+      })
+      .then((json: any) => {
+        console.log('response => ' + json);
+      });
   }
 }
