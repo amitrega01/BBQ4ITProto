@@ -133,13 +133,50 @@ export class LadderComponent implements OnInit {
   }
   ngOnInit() {}
   onClickSubmit() {
-    this.users.push(this.addUser.value);
-    console.log(this.users);
-    this.addUser.reset();
-    if (this.users.length >= 8 && this.users.length % 2 === 0) {
-      console.log('PO LOSOWANIU');
+    if (this.addUser.value.nick != '') {
+      if (!this.users.find(x => x.nick == this.addUser.value.nick)) {
+        this.users.push(this.addUser.value);
+      } else {
+        alert('Użytkownik o takim nicku już jest w turnieju');
+      }
       console.log(this.users);
-      this.tournamentReady = true;
+      this.addUser.reset();
+      if (this.users.length >= 8 && this.users.length % 2 === 0) {
+        console.log('PO LOSOWANIU');
+        console.log(this.users);
+        this.tournamentReady = true;
+      }
+    } else {
+      alert('Wpisz nick!');
+    }
+  }
+  async deleteCompetition() {
+    console.log(this._comp);
+    if (confirm('Usunąc ' + this._comp.name + '?')) {
+      await fetch(`https://us-central1-bbq4it-b4163.cloudfunctions.net/api/competitions`, {
+        method: 'DELETE', // *GET, POST, PUT, DELETE, etc.
+        mode: 'cors', // no-cors, cors, *same-origin
+        cache: 'no-cache', // *def ault, no-cache, reload, force-cache, only-if-cached
+        credentials: 'same-origin', // include, *same-origin, omit
+        headers: {
+          'Content-Type': 'application/json',
+          'X-HTTP-Method-Override': 'DELETE'
+          // 'Content-Type': 'applicastion/x-www-form-urlencoded',
+        },
+        redirect: 'follow', // manual, *follow, error
+        referrer: 'no-referrer', // no-referrer, *client
+        body: JSON.stringify(this._comp) // body data type must match "Content-Type" header
+      })
+        .then((response: any) => {
+          console.log(response);
+          return response.json();
+        })
+        .then((json: any) => {
+          console.log(json);
+        })
+        .catch((err: any) => {
+          console.log(err);
+        });
     }
   }
   async launchTournament() {
