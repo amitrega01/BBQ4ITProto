@@ -180,3 +180,13 @@ img {
    height: 100px;
    color: white;
  }
+ .cnt {
+  margin-top: 185px;
+  margin-left:48.5%;
+  background: transparent;
+  border-color: white;
+  border-width: 1px;
+  color:white;
+  width:80px;
+  opacity: 0.5;
+ }

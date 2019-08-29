@@ -78,7 +78,7 @@ export class TopListComponent implements OnInit {
       this.topCarousel.slideTo(0);
     }
     else this.topCarousel.slideNext();
-  }, 1000);
+  }, 8000);
   }
   stop() {
     console.log('dziala');
@@ -89,7 +89,7 @@ export class TopListComponent implements OnInit {
           this.topCarousel.slideTo(0);
         }
         else this.topCarousel.slideNext();
-      }, 5000);
+      }, 8000);
     } else {
       console.log(typeof (this.interval))
       clearInterval(this.interval)

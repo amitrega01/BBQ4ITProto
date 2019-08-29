@@ -24,12 +24,14 @@
       <button  class="leftSwipe" (click)="next()"><i class="fas fa-angle-double-right"></i></button>
       
     </div>
-    <div style="margin: 0 auto;"> 
-      <button  (click)="stop()">STOP</button>
+   
+    <div > 
+      <button  class="btn cnt" (click)="stop()"><i class="fas fa-play"></i></button>
     </div>
-    
+
   </div>
 
+ 
 
     <div *ngIf="mobile" class="container" (window:resize)="getScreenWidth($event)">
       <div class="row">
