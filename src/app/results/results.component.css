@@ -24,7 +24,6 @@ table {
   width: 100%;
   counter-reset: row-num;
   counter-increment: row-num -1;
-  
 }
 table tr {
   counter-increment: row-num;
@@ -196,4 +195,14 @@ tr {
 }
 td {
   vertical-align: middle !important;
+}
+.ladderBtnL {
+  background: none;
+  border-radius: 10px 10px 0px 0px !important;
+  color: white;
+}
+.ladderBtnR {
+  background: none;
+  border-radius: 0px 0px 10px 10px !important;
+  color: white;
 }

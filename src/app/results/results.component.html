@@ -1,24 +1,48 @@
 <div (window:resize)="getScreenWidth($event)">
   <div *ngIf="!mobile" (window:resize)="getScreenWidth($event)">
-    <table class="table center">
-      <thead>
-        <tr class="firstRow">
-          <th class="firstCol">Pos</th>
-          <th>Nick</th>
-          <th>Score</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of results | async">
-          <td>
-            <p class="medal fas fa-medal"></p>
-          </td>
+    <div *ngIf="_comp.type == 'normal'">
+      <table class="table center">
+        <thead>
+          <tr class="firstRow">
+            <th class="firstCol">Pos</th>
+            <th>Nick</th>
+            <th>Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of results | async">
+            <td>
+              <p class="medal fas fa-medal"></p>
+            </td>
 
-          <td>{{ item.nick }}</td>
-          <td>{{ item.score }}</td>
-        </tr>
-      </tbody>
-    </table>
+            <td>{{ item.nick }}</td>
+            <td>{{ item.score }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div *ngIf="_comp.type == 'ladder'">
+      <div *ngIf="tree != undefined" style="display: flex;scale: 0.2; flex-direction: row; overflow: scroll;">
+        <div
+          style="display: flex;
+              flex-direction: column;justify-content: space-evenly; align-content: space-around"
+          *ngFor="let round of tree.rounds.reverse()"
+        >
+          <div *ngFor="let bracket of round">
+            <div style="display: flex; flex-direction: column; padding: 16px;">
+              <button class="ladderBtnL" (click)="setResult(bracket, 0)">
+                {{ bracket.result[0] ? bracket.result[0].nick : '______' }}
+              </button>
+              <button class="ladderBtnR" (click)="setResult(bracket, 1)">
+                {{ bracket.result[1] ? bracket.result[1].nick : '______' }}
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="winner" *ngIf="tree.winner != undefined">🏆 {{ tree.winner.nick }}🏆</div>
+        <div class="winnerEmpty" *ngIf="tree.winner == undefined">🏆 ______ 🏆</div>
+      </div>
+    </div>
   </div>
 
   <div *ngIf="mobile" (window:resize)="getScreenWidth($event)">

@@ -2,9 +2,13 @@
 <div
   style="display: flex;
 flex-direction: column;
-justify-content: center;
+justify-content: left;
 flex-flow: wrap;
-overflow: auto;"
+overflow: auto;
+max-width: 100vw;
+overflow-x: scroll;
+height: auto;
+padding-bottom: 100px;"
 >
   <div *ngIf="tree == undefined">
     <form id="addUser" [formGroup]="addUser" (ngSubmit)="onClickSubmit()">
@@ -28,12 +32,12 @@ overflow: auto;"
       Uruchom turniej
     </button>
   </div>
-  <div *ngIf="tree != undefined" class="treeContainer">
+  <!-- <div *ngIf="tree != undefined" class="treeContainer">
     <div class="winner" *ngIf="tree.winner != undefined">🏆 {{ tree.winner.nick }}🏆</div>
     <div class="winnerEmpty" *ngIf="tree.winner == undefined">🏆 ______ 🏆</div>
     <div
       style="display: flex;
-    flex-direction: row;justify-content: space-evenly; align-content: space-around"
+    flex-direction: row;justify-content: center; align-content: space-around"
       *ngFor="let round of tree.rounds"
     >
       <div *ngFor="let bracket of round">
@@ -47,6 +51,26 @@ overflow: auto;"
         </div>
       </div>
     </div>
+  </div> -->
+  <div *ngIf="tree != undefined" style="display: flex; flex-direction: row">
+    <div
+      style="display: flex;
+      flex-direction: column;justify-content: space-evenly; align-content: space-around"
+      *ngFor="let round of tree.rounds.reverse()"
+    >
+      <div *ngFor="let bracket of round">
+        <div style="display: flex; flex-direction: column; padding: 16px;">
+          <button class="ladderBtnL" (click)="setResult(bracket, 0)">
+            {{ bracket.result[0] ? bracket.result[0].nick : '______' }}
+          </button>
+          <button class="ladderBtnR" (click)="setResult(bracket, 1)">
+            {{ bracket.result[1] ? bracket.result[1].nick : '______' }}
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="winner" *ngIf="tree.winner != undefined">🏆 {{ tree.winner.nick }}🏆</div>
+    <div class="winnerEmpty" *ngIf="tree.winner == undefined">🏆 ______ 🏆</div>
   </div>
 </div>
 <div style="position: fixed;width: 100%;   bottom: 64px; margin: 0 auto; text-align: center">

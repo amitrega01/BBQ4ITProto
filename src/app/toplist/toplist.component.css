@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   min-height: 100vh;
+  height: auto;
   font-family: 'Open Sans', sans-serif !important;
 
   background-image: url('../../assets/bokeh.svg');
@@ -11,13 +12,16 @@
   opacity: 0.5;
   background: linear-gradient(to top right, rgba(167, 61, 0, 0.993), rgba(143, 0, 109, 0.808));
   min-height: 100vh !important;
+  height: auto;
+  overflow: scroll;
+  padding-bottom: 100px;
 }
 
 .srodek {
   text-align: center !important;
 }
 table {
-  width: 40%;
+  width: 80%;
   counter-reset: row-num;
   counter-increment: row-num -1;
 }
@@ -157,7 +161,7 @@ img {
   margin-bottom: 25px;
 }
 .item-carousel {
-  width: 500px !important;
+  width: 80vw !important;
   min-height: 500px !important;
   height: auto !important;
   border-color: white !important;
@@ -165,28 +169,28 @@ img {
   opacity: 0.1;
   color: white !important;
 }
- .inline {
-   display: flex;
-   flex-direction: row;
+.inline {
+  display: flex;
+  flex-direction: row;
   justify-content: space-between;
- }
- .leftSwipe {
-   margin: 10px;
-   margin-top: 150px;
-   background: transparent;
-   border-radius: 10px;
-   border-color: white;
-   opacity: 0.6;
-   height: 100px;
-   color: white;
- }
- .cnt {
+}
+.leftSwipe {
+  margin: 10px;
+  margin-top: 150px;
+  background: transparent;
+  border-radius: 10px;
+  border-color: white;
+  opacity: 0.6;
+  height: 100px;
+  color: white;
+}
+.cnt {
   margin-top: 185px;
-  margin-left:48.5%;
+  margin-left: 48.5%;
   background: transparent;
   border-color: white;
   border-width: 1px;
-  color:white;
-  width:80px;
+  color: white;
+  width: 80px;
   opacity: 0.5;
- }
+}
