@@ -24,11 +24,13 @@
     "@angular/router": "~8.2.0",
     "@ng-bootstrap/ng-bootstrap": "^5.1.0",
     "class-transformer": "^0.2.3",
+    "angular2-carousel": "^1.0.17",
     "firebase": "^6.3.3",
     "guid-typescript": "^1.0.9",
     "jquery": "^3.4.1",
     "moment": "^2.24.0",
     "reflect-metadata": "^0.1.13",
+    "ngx-carousel-lib": "^0.1.2",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"

@@ -19,7 +19,7 @@ import { TopListComponent } from './toplist/toplist.component';
 import { ResultsComponent } from './results/results.component';
 import { PlayerResultComponent } from './player-result/player-result.component';
 import { AdminComponent } from './admin/admin.component';
-
+import { CarouselModule } from "ngx-carousel-lib";
 const appRoutes: Routes = [
   { path: 'admin', component: AdminComponent },
   {
@@ -44,7 +44,7 @@ const appRoutes: Routes = [
   imports: [
     RouterModule.forRoot(
       appRoutes,
-      { enableTracing: true } // <-- debugging purposes only
+      { enableTracing: true }, // <-- debugging purposes only
     ),
     NgbModule,
     BrowserModule,
@@ -55,7 +55,8 @@ const appRoutes: Routes = [
     AngularFirestoreModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    CarouselModule
   ],
   providers: [],
   bootstrap: [AppComponent]

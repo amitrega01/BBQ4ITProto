@@ -156,3 +156,37 @@ img {
   height: auto;
   margin-bottom: 25px;
 }
+.item-carousel {
+  width: 500px !important;
+  min-height: 500px !important;
+  height: auto !important;
+  border-color: white !important;
+  border-width: 1px !important;
+  opacity: 0.1;
+  color: white !important;
+}
+ .inline {
+   display: flex;
+   flex-direction: row;
+  justify-content: space-between;
+ }
+ .leftSwipe {
+   margin: 10px;
+   margin-top: 150px;
+   background: transparent;
+   border-radius: 10px;
+   border-color: white;
+   opacity: 0.6;
+   height: 100px;
+   color: white;
+ }
+ .cnt {
+  margin-top: 185px;
+  margin-left:48.5%;
+  background: transparent;
+  border-color: white;
+  border-width: 1px;
+  color:white;
+  width:80px;
+  opacity: 0.5;
+ }
