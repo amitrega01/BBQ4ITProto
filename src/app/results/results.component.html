@@ -22,20 +22,23 @@
       </table>
     </div>
     <div *ngIf="_comp.type == 'ladder'">
-      <div *ngIf="tree != undefined" style="display: flex;scale: 0.2; flex-direction: row; overflow: scroll;">
+      <div *ngIf="tree != undefined" style="display: flex; flex-direction: row;">
         <div
           style="display: flex;
-              flex-direction: column;justify-content: space-evenly; align-content: space-around"
+              flex-direction: column;justify-content: space-evenly; align-content: space-around;"
           *ngFor="let round of tree.rounds.reverse()"
         >
           <div *ngFor="let bracket of round">
-            <div style="display: flex; flex-direction: column; padding: 16px;">
-              <button class="ladderBtnL" (click)="setResult(bracket, 0)">
-                {{ bracket.result[0] ? bracket.result[0].nick : '______' }}
-              </button>
-              <button class="ladderBtnR" (click)="setResult(bracket, 1)">
-                {{ bracket.result[1] ? bracket.result[1].nick : '______' }}
-              </button>
+            <div
+              style="display: flex;  flex-direction: column; padding: 4px; 
+            margin-right: 16px;margin-top:8px;"
+            >
+              <div class="ladderBtnL">
+                {{ bracket.result[0] ? bracket.result[0].nick : '____________' }}
+              </div>
+              <div class="ladderBtnR">
+                {{ bracket.result[1] ? bracket.result[1].nick : '____________' }}
+              </div>
             </div>
           </div>
         </div>
