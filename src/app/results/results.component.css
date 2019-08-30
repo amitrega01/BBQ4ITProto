@@ -2,22 +2,6 @@
 /* button {
     width: 150px;
 } */
-.wrap {
-  margin: 0;
-  padding: 0;
-  width: 80%;
-  height: 100vh;
-  font-family: 'Open Sans', sans-serif;
-}
-.inner {
-  display: flex;
-  flex: 1;
-  opacity: 0.5;
-  background: linear-gradient(to top right, rgba(98, 98, 206, 0.6), rgba(0, 0, 200, 0.5));
-  min-height: 100vh !important;
-  height: auto !important;
-}
-
 .srodek {
   text-align: center !important;
 }
@@ -199,15 +183,15 @@ td {
   vertical-align: middle !important;
 }
 .ladderBtnL {
-  padding: 4px;
+  padding: 4px 16px;
   background: none;
-  border-radius: 10px 10px 0px 0px !important;
+  border-radius: 4px 4px 0px 0px !important;
   color: white;
 }
 .ladderBtnR {
-  padding: 4px;
+  padding: 4px 16px;
   background: none;
-  border-radius: 0px 0px 10px 10px !important;
+  border-radius: 0px 0px 4px 4px !important;
   color: white;
 }
 .winner {

@@ -6,12 +6,19 @@
   font-size: 0.8em;
   background-image: url('../../assets/bokeh.svg');
   background-size: auto 300%;
+  background-position: 0% 10%;
+  transition: 1s ease;
 }
 .inner {
   opacity: 0.5;
-  background: linear-gradient(to top right, rgba(167, 61, 0, 0.993), rgba(143, 0, 109, 0.808));
+  background: linear-gradient(to top right, rgba(167, 61, 0, 0.993), rgba(91, 0, 143, 0.808));
   min-height: 100vh !important;
   height: 100%;
+}
+.wrap:hover {
+  background-position: 2% 12%;
+  background-size: auto 297%;
+  transition: 1s ease;
 }
 
 .srodek {

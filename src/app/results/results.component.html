@@ -22,7 +22,10 @@
       </table>
     </div>
     <div *ngIf="_comp.type == 'ladder'">
-      <div *ngIf="tree != undefined" style="display: flex; flex-direction: row;">
+      <div
+        *ngIf="tree != undefined"
+        style="min-height: 70vh;display: flex; flex-direction: row; justify-content: space-evenly; align-content: stretch"
+      >
         <div
           style="display: flex;
               flex-direction: column;justify-content: space-evenly; align-content: space-around;"
