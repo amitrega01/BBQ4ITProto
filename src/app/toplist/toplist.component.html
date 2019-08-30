@@ -6,7 +6,6 @@
       </a>
     </div>
 
-    <br />
     <div *ngIf="!mobile" (window:resize)="getScreenWidth($event)">
       <!-- <div class="inline">
         <button class="leftSwipe" (click)="prev()"><i class="fas fa-angle-double-left"></i></button>
@@ -20,8 +19,8 @@
 
         <button class="leftSwipe" (click)="next()"><i class="fas fa-angle-double-right"></i></button>
       </div> -->
-      <ngb-carousel #carousel style="margin-top: 30px;min-height: 80vh; padding-bottom: 30px;" interval="10000">
-        <ng-template class="carousel-item" style="margin: 0 auto; " *ngFor="let item of items | async" ngbSlide>
+      <ngb-carousel #carousel style="height: 91vh;padding-bottom: 30px;" interval="10000">
+        <ng-template style="margin: 0 auto; " *ngFor="let item of items | async" ngbSlide>
           <div style="width: 80%;margin: 0 auto; text-align: center;">
             <h3 style="color: white;">{{ item.name }}</h3>
             <app-results [comp]="item"></app-results>

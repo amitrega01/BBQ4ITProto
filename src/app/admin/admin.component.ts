@@ -26,7 +26,7 @@ export class AdminComponent {
   newCompForm: FormGroup = new FormGroup({
     name: new FormControl(''),
     route: new FormControl(''),
-    type: new FormControl('')
+    type: new FormControl('normal')
   });
 
   constructor(public afAuth: AngularFireAuth, afs: AngularFirestore, private modalService: NgbModal) {
@@ -110,7 +110,7 @@ export class AdminComponent {
     }
   }
   open(content) {
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', backdrop: 'static' }).result.then(
       result => {
         this.closeResult = `Closed with: ${result}`;
       },

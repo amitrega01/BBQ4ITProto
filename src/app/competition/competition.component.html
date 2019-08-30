@@ -16,32 +16,39 @@
 
     <input class="scoreInput" type="submit" value="Dodaj" />
   </form>
-  <div *ngIf="results != undefined">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th scope="col" sortable="nick" (sort)="onSort($event)">Nick</th>
-          <th scope="col" sortable="score" (sort)="onSort($event)">Score</th>
-          <th style="text-align: center">More</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of results | async">
-          <td>{{ item.nick }}</td>
-          <td>{{ item.score }}</td>
-          <td style="text-align: center">
-            <span class="deleteBtn" (click)="open(content, item)"
-              ><i class="fa fa-ellipsis-h" style="font-size:20px;"></i
-            ></span>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <br />
-    <br />
-  </div>
-  <div style="position: fixed;width: 100%;   bottom: 64px; margin: 0 auto; text-align: center">
-    <button type="button" class="btn btn-outline-danger" (click)="deleteCompetition()">Usuń konkurencję</button>
+  <div style="display: flex;flex-direction: column; flex: 1;align-items: stretch; justify-content: space-between;">
+    <div *ngIf="results != undefined">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col" sortable="nick" (sort)="onSort($event)">Nick</th>
+            <th scope="col" sortable="score" (sort)="onSort($event)">Score</th>
+            <th style="text-align: center">More</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of results | async">
+            <td>{{ item.nick }}</td>
+            <td>{{ item.score }}</td>
+            <td style="text-align: center">
+              <span class="deleteBtn" (click)="open(content, item)"
+                ><i class="fa fa-ellipsis-h" style="font-size:20px;"></i
+              ></span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br />
+      <br />
+    </div>
+    <button
+      style="margin-bottom: 60px; align-self: center;width: 160px;"
+      type="button"
+      class="btn btn-outline-danger"
+      (click)="deleteCompetition()"
+    >
+      Usuń konkurencję
+    </button>
   </div>
 </div>
 <ng-template #content let-modal>

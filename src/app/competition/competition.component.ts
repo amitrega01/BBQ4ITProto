@@ -137,7 +137,7 @@ export class CompetitionComponent {
   open(content, item: Score) {
     this.currentItem = item;
     this.updateScoreForm.setValue(item);
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', backdrop: 'static' }).result.then(
       result => {
         this.closeResult = `Closed with: ${result}`;
       },
